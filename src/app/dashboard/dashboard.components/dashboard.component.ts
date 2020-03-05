@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
   title: String;
   options: any[] = [];
   userName: string;
+  collapsed: boolean;
 
   constructor(
     private activiteRouter: ActivatedRoute,
