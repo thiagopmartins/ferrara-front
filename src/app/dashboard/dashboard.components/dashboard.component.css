@@ -1,0 +1,118 @@
+header .header-nav .nav-link.nav-text {
+  line-height: 1.5rem;
+}
+
+form {
+  padding-left: 2rem;
+}
+
+.header .header-actions > .dropdown > .dropdown-toggle,
+.header .settings > .dropdown > .dropdown-toggle,
+header .header-actions > .dropdown > .dropdown-toggle,
+header .settings > .dropdown > .dropdown-toggle {
+  height: 2.2rem !important;
+  line-height: 2.2rem !important;
+  color: #fff !important;
+}
+
+.header.header-4,
+header.header-4 {
+  background-color: #ff6542 !important;
+  height: 2rem;
+}
+
+.header .branding .title,
+header .branding .title {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 2px 0 0 5%;
+}
+
+.clr-vertical-nav {
+  width: 8rem;
+  background-color: #f1f1f1;
+}
+
+.header .branding > .nav-link,
+.header .branding > a,
+header .branding > .nav-link,
+header .branding > a {
+  height: 2rem;
+}
+
+.is-collapsed .nav-link.active,
+.is-collapsed .nav-link:hover {
+  padding-left: 0.5rem !important;
+}
+
+.clr-vertical-nav .nav-link.active,
+.clr-vertical-nav .nav-link:hover {
+  font-weight: 600;
+  border-left: 0.2rem solid #ff6542;
+  padding-left: 1rem;
+  color: #4e4e4e;
+}
+
+.main-container:not([class*="open-overflow-menu"]):not([class*="open-hamburger-menu"])
+  .clr-vertical-nav.is-collapsed.has-icons
+  .nav-link {
+  padding-left: 0.7rem;
+}
+
+.main-container:not([class*="open-overflow-menu"]):not([class*="open-hamburger-menu"])
+  .clr-vertical-nav.is-collapsed
+  .nav-icon {
+  margin: 0;
+  /* margin-left: .666667rem; */
+}
+
+.clr-vertical-nav .nav-link.active .nav-icon,
+.clr-vertical-nav .nav-link:hover .nav-icon {
+  fill: #4e4e4e !important;
+}
+
+.main-container {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background: #fff;
+}
+
+.main-container .content-container .content-area {
+  padding: 0;
+  margin: 0rem 0.1rem 0.1rem 0.1rem;
+}
+
+.header-6 {
+  height: 1.55rem !important;
+  border-bottom: 1px solid #ccc !important;
+  background-color: #f1f1f1;
+  color: #4e4e4e !important;
+}
+.form .form-group,
+form .form-group {
+  padding-left: 5.7rem !important;
+}
+
+.header .header-nav .nav-link,
+header .header-nav .nav-link {
+  color: #4e4e4e !important;
+}
+
+.nav-text {
+  margin-left: 5px !important;
+}
+
+.header[_ngcontent-c1] .header-nav[_ngcontent-c1] .nav-link[_ngcontent-c1],
+header[_ngcontent-c1] .header-nav[_ngcontent-c1] .nav-link[_ngcontent-c1] {
+  color: #4e4e4e !important;
+}
+
+.clr-vertical-nav .nav-group-text,
+.clr-vertical-nav .nav-link {
+  padding: 0 0.5rem 0 1.2rem;
+}
+
+#img-logo {
+  height: 55px;
+}

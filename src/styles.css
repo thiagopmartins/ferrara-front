@@ -1,0 +1,115 @@
+body {
+  background-color: #fafafa;
+}
+
+input[type="date"]:not([readonly]),
+input[type="datetime-local"]:not([readonly]),
+input[type="email"]:not([readonly]),
+input[type="number"]:not([readonly]),
+input[type="password"]:not([readonly]),
+input[type="tel"]:not([readonly]),
+input[type="text"]:not([readonly]),
+input[type="time"]:not([readonly]),
+input[type="url"]:not([readonly]) {
+  background: none !important;
+}
+
+button:focus {
+  outline: 0;
+}
+
+a {
+  color: #00b0ef;
+}
+
+clr-datagrid {
+  padding: 0 2%;
+  min-height: 250px;
+}
+
+a:visited {
+  color: #00b0ef;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+[input-delinea] {
+  border-radius: 3px !important;
+  border-style: solid !important;
+  font-size: 14px;
+  justify-content: space-between;
+  border-color: rgb(223, 225, 230) !important;
+  border-width: 2px !important;
+  padding: 6px !important;
+  min-height: 40px;
+  color: #4e4e4e !important;
+}
+
+[input-delinea]:focus {
+  border-color: rgba(255, 101, 66, 0.57) !important;
+  background: none;
+}
+
+.form-group {
+  padding-top: 1.6rem;
+}
+
+.form-group .btn-delinea {
+  margin-top: 200px;
+}
+
+.btn-delinea {
+  border-color: #ff6542;
+  background-color: #ff6542;
+  color: #fff;
+  transition: 0.25s;
+}
+
+.btn-delinea:hover {
+  background-color: #e2593b !important;
+  border-color: #e2593b;
+  color: #fff !important;
+}
+
+.btn-delinea:focus,
+.btn-delinea-outline:focus {
+  outline: none;
+}
+
+.btn-delinea:active,
+.btn-delinea-outline:active {
+  box-shadow: 0 2px 0 0 #7a9828 inset;
+}
+
+.btn-delinea-outline {
+  background-color: rgba(166, 206, 57, 0.09);
+  color: #ff6542;
+  border-color: #ff6542;
+  transition: 0.25s;
+}
+
+.btn-delinea-outline:hover {
+  color: #e2593b !important;
+  background-color: rgba(166, 206, 57, 0.2) !important;
+}
+
+.modal-dialog.modal-lg {
+  max-width: 30rem;
+}
+
+.modal-footer {
+  padding: 1rem 10% 0px;
+}
+
+#btn-login {
+  margin-top: 1.2rem;
+}
+
+#no-login {
+  margin-top: 0.7rem;
+  text-align: center;
+}

@@ -1,0 +1,52 @@
+<img center src="../../../assets/logo.png" />
+
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-sm-12 clr-col-md-6">
+    <h2>Insira suas credenciais</h2>
+    <div center class="panel">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="user"
+              maxlength="30"
+              autocomplete="off"
+              placeholder="Insira seu usuário"
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="password"
+              formControlName="password"
+              maxlength="30"
+              autocomplete="off"
+              placeholder="Insira sua senha"
+            />
+          </label>
+        </div>
+        <button
+          [clrLoading]="submitLoading"
+          type="submit"
+          class="btn btn-block btn-delinea"
+          id="btn-login"
+          (click)="onLogin()"
+        >
+          ENTRAR
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

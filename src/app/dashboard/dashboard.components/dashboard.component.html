@@ -1,0 +1,53 @@
+<header class="header-4">
+  <div class="branding">
+    <a routerLink="/dashboard" class="nav-link">
+      <img id="img-logo" center src="../../../assets/logo.png" />
+      <span class="title">Ferrara - Gestão de Pedidos</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <clr-dropdown>
+      <button class="nav-text" clrDropdownTrigger>
+        {{ userName }}
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a routerLink="/login" (click)="logout()" clrDropdownItem>Sair</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>
+<div class="main-container">
+  <div class="content-container">
+    <div class="content-area">
+      <header class="header-6">
+        <div class="header-nav">
+          <a class="active nav-link nav-text">{{ title }}</a>
+        </div>
+      </header>
+      <div class="row flex-items-xs-center">
+        <div class="col-xs-10	col-sm-10	col-md-10	col-lg-10	col-xl-10">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+    <clr-vertical-nav
+      [clrVerticalNavCollapsible]="true"
+      [(clrVerticalNavCollapsed)]="collapsed"
+    >
+      <a
+        clrVerticalNavLink
+        *ngFor="let p of options"
+        [routerLink]="p.link"
+        routerLinkActive="active"
+      >
+        <clr-icon
+          clrVerticalNavIcon
+          [attr.shape]="p.icon"
+          class="is-solid"
+        ></clr-icon>
+        <span class="nav-text">{{ p.title }}</span>
+      </a>
+    </clr-vertical-nav>
+  </div>
+</div>
