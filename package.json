@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build"
+    "start.prod": "http-server dist/",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
