@@ -11,6 +11,15 @@ import { Customer } from "../models/customer.model";
 export class CustomerService {
   constructor(private http: HttpClient) {}
 
+  token: string = localStorage.getItem("token");
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.token}`
+    })
+  };
+
   getAllCustomers(): Observable<Customer> {
     return this.http
       .get<Customer>(API_URL + "/customer/", HTTP_OPTIONS)

@@ -1,13 +1,13 @@
 import { HttpHeaders } from "@angular/common/http";
 import { throwError } from "rxjs";
+import { environment } from "../../environments/environment";
 
-const token: string = localStorage.getItem("token");
+export const API_URL: string = environment.apiUrl;
 
-export const API_URL: string = process.env.API_URL || "http://localhost:3333";
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${localStorage.getItem("token")}`
   })
 };
 
