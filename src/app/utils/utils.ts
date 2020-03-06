@@ -3,7 +3,7 @@ import { throwError } from "rxjs";
 
 const token: string = localStorage.getItem("token");
 
-export const API_URL: string = "https://ferrara-api.herokuapp.com/customer";
+export const API_URL: string = "https://ferrara-api.herokuapp.com";
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
