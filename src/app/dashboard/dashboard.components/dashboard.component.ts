@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     private titlePage: Title
   ) {
     this.title = "Clientes";
-    titlePage.setTitle("Ferrara - Gestão de Pedidos");
+    titlePage.setTitle("Ferrara - Gestor de Pedidos");
 
     this.userName =
       localStorage.getItem("user") === (undefined || null)

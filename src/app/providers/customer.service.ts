@@ -11,42 +11,38 @@ import { Customer } from "../models/customer.model";
 export class CustomerService {
   constructor(private http: HttpClient) {}
 
-  token: string = localStorage.getItem("token");
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${this.token}`
-    })
-  };
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  });
 
   getAllCustomers(): Observable<Customer> {
     return this.http
-      .get<Customer>(API_URL + "/customer/", HTTP_OPTIONS)
+      .get<Customer>(API_URL + "/customer/", { headers: this.headers })
       .pipe(retry(1), catchError(handleError));
   }
 
   createCustomer(customer: Customer): Observable<Customer> {
     return this.http
-      .post(API_URL + "/customer/", customer, HTTP_OPTIONS)
+      .post(API_URL + "/customer/", customer, { headers: this.headers })
       .pipe(retry(1), catchError(handleError));
   }
 
   updateCustomer(customer: Customer): Observable<Customer> {
     return this.http
-      .put(API_URL + "/customer", customer, HTTP_OPTIONS)
+      .put(API_URL + "/customer", customer, { headers: this.headers })
       .pipe(retry(1), catchError(handleError));
   }
 
   deleteCustomer(id: string): Observable<Customer> {
     return this.http
-      .delete(API_URL + `/customer/${id}`, HTTP_OPTIONS)
+      .delete(API_URL + `/customer/${id}`, { headers: this.headers })
       .pipe(retry(1), catchError(handleError));
   }
 
   getCustomer(id: string): Observable<Customer> {
     return this.http
-      .get<Customer>(API_URL + `/customer/${id}`, HTTP_OPTIONS)
+      .get<Customer>(API_URL + `/customer/${id}`, { headers: this.headers })
       .pipe(retry(1), catchError(handleError));
   }
 }

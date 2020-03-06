@@ -109,10 +109,7 @@ export class CustomersComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (
-      localStorage.getItem("token") === (undefined || null) &&
-      localStorage.getItem("permission") !== "1"
-    ) {
+    if (localStorage.getItem("token") === (undefined || null)) {
       this.dialogService
         .confirm(`Sem permissão para deletar um cliente`)
         .then(() => {

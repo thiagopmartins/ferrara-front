@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private titlePage: Title
   ) {
-    titlePage.setTitle("Conectar-se a gestão de pedidos");
+    titlePage.setTitle("Conectar-se a Gestor de Pedidos");
   }
 
   ngOnInit() {
