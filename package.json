@@ -9,10 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-<<<<<<< HEAD
     "start.prod": "http-server dist/",
-=======
->>>>>>> 81ae8574407e6bf328c665f10eb7ee58619c77b0
     "heroku-postbuild": "ng build --prod"
   },
   "private": true,
