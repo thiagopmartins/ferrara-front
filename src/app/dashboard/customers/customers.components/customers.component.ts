@@ -110,16 +110,8 @@ export class CustomersComponent implements OnInit {
   }
 
   onDelete(): void {
-    console.log(+localStorage.getItem("permission"));
-    if (
-      localStorage.getItem("token") === (undefined || null) &&
-      +localStorage.getItem("permission") !== PermissionEnum.owner
-    ) {
-      this.dialogService
-        .confirm(`Sem permissão para deletar um cliente`)
-        .then(() => {
-          this.router.navigate(["login"]);
-        });
+    if (+localStorage.getItem("permission") !== PermissionEnum.owner) {
+      this.dialogService.confirm(`Sem permissão para deletar um cliente`);
     } else {
       this.dialogService
         .confirm(`Deseja deletar o candidato ${this.customerSelected.name} ?`)
