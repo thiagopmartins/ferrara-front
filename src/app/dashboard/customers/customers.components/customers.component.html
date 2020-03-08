@@ -235,11 +235,15 @@
           >
             <input
               input-delinea
-              type="number"
+              type="text"
               formControlName="deliveryTax"
               size="16"
               maxlength="68"
               autocomplete="off"
+              currencyMask
+              [(ngModel)]="value"
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+              placeholder="R$ 0,00"
             />
           </label>
         </div>
@@ -278,7 +282,7 @@
       (click)="onSave()"
       [disabled]="!form.valid || submitLoading"
     >
-      {{buttonSubmitText}}
+      {{ buttonSubmitText }}
     </button>
   </div>
 </clr-modal>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { CurrencyPipe } from "@angular/common";
 
 import { Customer } from "src/app/models/customer.model";
 import { DialogService } from "src/app/providers/dialog.service";
@@ -62,6 +61,7 @@ export class CustomersComponent implements OnInit {
 
   onCreate(): void {
     this.form.reset();
+    this.submitLoading = false;
     if (this.customerSelected) {
       this.customerSelected = null;
     }
@@ -99,6 +99,7 @@ export class CustomersComponent implements OnInit {
   onEdit(): void {
     this.showModal = true;
     this.buttonSubmitText = "Salvar";
+    this.submitLoading = false;
     this.form.reset();
     this.customerService
       .getCustomer(this.customerSelected._id)

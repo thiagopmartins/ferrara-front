@@ -15,9 +15,9 @@
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/cli": "~7.0.6",
-    "@angular/compiler-cli": "~7.0.0",
     "@angular/common": "~7.0.0",
     "@angular/compiler": "~7.0.0",
+    "@angular/compiler-cli": "~7.0.0",
     "@angular/core": "~7.0.0",
     "@angular/forms": "~7.0.0",
     "@angular/http": "~7.0.0",
@@ -29,11 +29,12 @@
     "@clr/ui": "^1.1.0",
     "@webcomponents/custom-elements": "^1.0.0",
     "core-js": "^2.5.4",
+    "ng2-currency-mask": "^5.3.1",
     "ng2-toastr": "^4.1.2",
     "ngx-mask": "^8.1.7",
     "rxjs": "~6.3.3",
-    "zone.js": "~0.8.26",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.10.0",
