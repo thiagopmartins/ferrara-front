@@ -17,7 +17,7 @@ header .settings > .dropdown > .dropdown-toggle {
 
 .header.header-4,
 header.header-4 {
-  background-color: #ff6542 !important;
+  background-color: #b70606 !important;
   height: 2rem;
 }
 
@@ -48,7 +48,7 @@ header .branding > a {
 .clr-vertical-nav .nav-link.active,
 .clr-vertical-nav .nav-link:hover {
   font-weight: 600;
-  border-left: 0.2rem solid #ff6542;
+  border-left: 0.2rem solid #b70606;
   padding-left: 1rem;
   color: #4e4e4e;
 }

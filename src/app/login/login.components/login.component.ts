@@ -14,6 +14,7 @@ import { Token } from "src/app/models/token.model";
 export class LoginComponent implements OnInit {
   form: FormGroup;
   submitLoading: boolean = false;
+  iconShowPassword: string;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private titlePage: Title
   ) {
     titlePage.setTitle("Conectar-se a Gestor de Pedidos");
+    this.iconShowPassword = "eye";
   }
 
   ngOnInit() {
@@ -53,10 +55,18 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["dashboard"]);
         console.log(data);
         localStorage.setItem("token", data.token);
+        localStorage.setItem("permission", data.user.permission);
         localStorage.setItem("user", userName);
       })
       .add(() => {
         this.submitLoading = false;
       });
+  }
+
+  showPassword(): void {
+    console.log("clicou");
+    this.iconShowPassword === "eye"
+      ? (this.iconShowPassword = "eye-hide")
+      : (this.iconShowPassword = "eye");
   }
 }

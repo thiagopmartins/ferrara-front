@@ -29,12 +29,19 @@
           >
             <input
               input-delinea
-              type="password"
+              [attr.type]="iconShowPassword === 'eye' ? 'password' : 'text'"
               formControlName="password"
               maxlength="30"
               autocomplete="off"
               placeholder="Insira sua senha"
             />
+            <button
+              type="button"
+              class="eyes-password"
+              (click)="showPassword()"
+            >
+              <clr-icon [attr.shape]="iconShowPassword"></clr-icon>
+            </button>
           </label>
         </div>
         <button

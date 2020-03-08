@@ -50,7 +50,7 @@ a:hover {
 }
 
 [input-delinea]:focus {
-  border-color: rgba(255, 101, 66, 0.57) !important;
+  border-color: rgba(183, 6, 6, 0.4) !important;
   background: none;
 }
 
@@ -63,15 +63,15 @@ a:hover {
 }
 
 .btn-delinea {
-  border-color: #ff6542;
-  background-color: #ff6542;
+  border-color: #b70606;
+  background-color: #b70606;
   color: #fff;
   transition: 0.25s;
 }
 
 .btn-delinea:hover {
-  background-color: #e2593b !important;
-  border-color: #e2593b;
+  background-color: #800101 !important;
+  border-color: #800101;
   color: #fff !important;
 }
 
@@ -87,13 +87,13 @@ a:hover {
 
 .btn-delinea-outline {
   background-color: rgba(166, 206, 57, 0.09);
-  color: #ff6542;
-  border-color: #ff6542;
+  color: #b70606;
+  border-color: #b70606;
   transition: 0.25s;
 }
 
 .btn-delinea-outline:hover {
-  color: #e2593b !important;
+  color: #800101 !important;
   background-color: rgba(166, 206, 57, 0.2) !important;
 }
 

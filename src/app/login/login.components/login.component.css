@@ -1,13 +1,13 @@
 img {
-  margin-top: 5%;
-  width: 200px;
-  height: 200px;
+  margin-top: 2%;
+  width: 150px;
+  height: 150px;
 }
 
 h2 {
   text-align: center;
   font-weight: 600;
-  color: #ff6542;
+  color: #b70606;
 }
 
 [center] {
@@ -33,4 +33,25 @@ h2 {
 .clr-row {
   margin-right: 0 !important;
   margin-left: 0 !important;
+}
+
+.eyes-password {
+  position: absolute;
+  z-index: 7;
+  top: -5px;
+  width: 37px;
+  height: 37px;
+  left: 261px;
+  background: none;
+  border: none;
+}
+
+.eyes-password clr-icon {
+  color: #b70606;
+  width: 20px;
+  height: auto;
+}
+
+.eyes-password:hover {
+  cursor: pointer;
 }

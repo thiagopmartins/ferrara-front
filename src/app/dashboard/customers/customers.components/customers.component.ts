@@ -6,6 +6,7 @@ import { DialogService } from "src/app/providers/dialog.service";
 import { CustomerService } from "src/app/providers/customer.service";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
 
 @Component({
   selector: "app-customers",
@@ -109,7 +110,11 @@ export class CustomersComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (localStorage.getItem("token") === (undefined || null)) {
+    console.log(+localStorage.getItem("permission"));
+    if (
+      localStorage.getItem("token") === (undefined || null) &&
+      +localStorage.getItem("permission") !== PermissionEnum.owner
+    ) {
       this.dialogService
         .confirm(`Sem permissão para deletar um cliente`)
         .then(() => {
