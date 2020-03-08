@@ -21,6 +21,7 @@ export class CustomersComponent implements OnInit {
   form: FormGroup;
   submitLoading: boolean = false;
   buttonSubmitText: string;
+  value: string;
 
   constructor(
     private customerService: CustomerService,
