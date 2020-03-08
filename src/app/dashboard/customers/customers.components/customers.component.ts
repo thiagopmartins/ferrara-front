@@ -21,15 +21,12 @@ export class CustomersComponent implements OnInit {
   showModal: boolean;
   form: FormGroup;
   submitLoading: boolean = false;
-  formattedAmount;
-  amount;
+  buttonSubmitText: string;
 
   constructor(
     private customerService: CustomerService,
     private dialogService: DialogService,
-    private fb: FormBuilder,
-    private router: Router,
-    private currencyPipe: CurrencyPipe
+    private fb: FormBuilder
   ) {
     this.form = this.fb.group({
       _id: [],
@@ -53,12 +50,6 @@ export class CustomersComponent implements OnInit {
     this.listCustomers();
   }
 
-  transformAmount(element) {
-    this.formattedAmount = this.currencyPipe.transform(this.formattedAmount);
-
-    element.target.value = this.formattedAmount;
-  }
-
   listCustomers() {
     this.customers = [];
     this.customerService.getAllCustomers().subscribe((data: {}) => {
@@ -74,31 +65,40 @@ export class CustomersComponent implements OnInit {
     if (this.customerSelected) {
       this.customerSelected = null;
     }
+    this.buttonSubmitText = "Cadastrar";
     this.showModal = true;
   }
 
   onSave(): void {
+    this.submitLoading = true;
     if (this.customerSelected) {
       console.log(this.form.value);
-      this.customerService.updateCustomer(this.form.value).subscribe(data => {
-        this.listCustomers();
-        this.showModal = false;
-        console.log(data);
-        this.dialogService.confirm(`Cliente salvo com sucesso.`);
-      });
+      this.customerService.updateCustomer(this.form.value).subscribe(
+        data => {
+          this.listCustomers();
+          this.showModal = false;
+          console.log(data);
+          this.dialogService.confirm(`Cliente salvo com sucesso.`);
+        },
+        () => (this.submitLoading = false)
+      );
     } else {
       console.log(this.form.value);
-      this.customerService.createCustomer(this.form.value).subscribe(data => {
-        this.listCustomers();
-        this.showModal = false;
-        console.log(data);
-        this.dialogService.confirm(`Cliente salvo com sucesso.`);
-      });
+      this.customerService.createCustomer(this.form.value).subscribe(
+        data => {
+          this.listCustomers();
+          this.showModal = false;
+          console.log(data);
+          this.dialogService.confirm(`Cliente salvo com sucesso.`);
+        },
+        () => (this.submitLoading = false)
+      );
     }
   }
 
   onEdit(): void {
     this.showModal = true;
+    this.buttonSubmitText = "Salvar";
     this.form.reset();
     this.customerService
       .getCustomer(this.customerSelected._id)
