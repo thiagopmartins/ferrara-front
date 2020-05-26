@@ -30,7 +30,7 @@
     </div>
   </clr-dg-action-bar>
   <clr-dg-placeholder>Sem Produtos cadastrados!</clr-dg-placeholder>
-  <clr-dg-column [clrDgField]="'name'">Nome</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'" [clrDgSortBy]="'name'" [clrDgSortOrder]="1">Nome</clr-dg-column>
   <clr-dg-column [clrDgField]="'category'">Categoria</clr-dg-column>
   <clr-dg-column [clrDgField]="'price'">Preço</clr-dg-column>
   <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
