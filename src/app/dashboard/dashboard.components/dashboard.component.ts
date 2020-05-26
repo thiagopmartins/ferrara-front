@@ -18,19 +18,24 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private titlePage: Title
   ) {
-    this.title = "Clientes";
     titlePage.setTitle("Ferrara - Gestor de Pedidos");
 
     this.userName =
       localStorage.getItem("user") === (undefined || null)
         ? "Não logado"
         : localStorage.getItem("user");
+
+    router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log(this.activiteRouter.firstChild);
+        this.title = this.activiteRouter.firstChild.data['value'].title
+      }
+    });
   }
 
   ngOnInit() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    console.log(token);
     if (
       token === undefined ||
       user === undefined ||
@@ -45,6 +50,11 @@ export class DashboardComponent implements OnInit {
         title: "Clientes",
         icon: "user",
         link: "./clientes"
+      },
+      {
+        title: "Produtos",
+        icon: "shopping-bag",
+        link: "./produtos"
       }
     ];
   }

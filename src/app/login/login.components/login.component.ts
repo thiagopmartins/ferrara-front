@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    console.log(token);
     if (
       token !== undefined &&
       user !== undefined &&
@@ -53,7 +52,6 @@ export class LoginComponent implements OnInit {
       .getToken(userName, password)
       .subscribe((data: Token) => {
         this.router.navigate(["dashboard"]);
-        console.log(data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("permission", data.user.permission);
         localStorage.setItem("user", userName);
@@ -64,7 +62,6 @@ export class LoginComponent implements OnInit {
   }
 
   showPassword(): void {
-    console.log("clicou");
     this.iconShowPassword === "eye"
       ? (this.iconShowPassword = "eye-hide")
       : (this.iconShowPassword = "eye");

@@ -13,7 +13,6 @@ export const HTTP_OPTIONS = {
 
 export const handleError = error => {
   let errorMessage = "";
-  console.log(error);
   if (error.error.error.description !== undefined) {
     errorMessage = error.error.error.description;
   } else {

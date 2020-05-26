@@ -1,0 +1,129 @@
+<clr-datagrid
+  [(clrDgSingleSelected)]="productSelected"
+  [clDgRowSelection]="true"
+>
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-sm btn-success-outline"
+        (click)="onCreate()"
+      >
+        <clr-icon shape="plus"></clr-icon> Cadastrar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-danger-outline"
+        (click)="onDelete()"
+        [disabled]="!productSelected"
+      >
+        <clr-icon shape="close"></clr-icon> Deletar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-secondary"
+        (click)="onEdit()"
+        [disabled]="!productSelected"
+      >
+        <clr-icon shape="pencil"></clr-icon> Editar
+      </button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-placeholder>Sem Produtos cadastrados!</clr-dg-placeholder>
+  <clr-dg-column [clrDgField]="'name'">Nome</clr-dg-column>
+  <clr-dg-column [clrDgField]="'category'">Categoria</clr-dg-column>
+  <clr-dg-column [clrDgField]="'price'">Preço</clr-dg-column>
+  <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
+    <clr-dg-cell>{{ product.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ product.category }}</clr-dg-cell>
+    <clr-dg-cell currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [(ngModel)]="value">{{ product.price }}</clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} de
+      {{ pagination.totalItems }} Produtos cadastrados
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'md'">
+  <h3 class="modal-title">Produtos</h3>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <section>
+        <div class="form-group">
+          <label for="name" class="required">Nome produto</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="name"
+              size="58"
+              maxlength="55"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div class="form-group" style="padding-top: 0.5rem !important; width: 200px !important;">
+          <label for="category" class="required">Categoria</label>
+          <select input-delinea clrSelect name="category" formControlName="category" [(ngModel)]="category" style="width: 175px !important;">
+            <option value="1">Adicional/Borda</option>
+            <option value="2">Pizza Salgada 35cm</option>
+            <option value="3">Pizza Salgada 45cm</option>
+            <option value="4">Pizza Doce 30cm</option>
+            <option value="5">Pizza Doce 35cm</option>
+            <option value="6">Bebida</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="number" class="required">Preço</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="price"
+              size="16"
+              maxlength="68"
+              autocomplete="off"
+              currencyMask
+              [(ngModel)]="value"
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+              placeholder="R$ 0,00"
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="number" class="required">Descrição</label>
+          <textarea input-delinea [(ngModel)]="description" name="description" formControlName="description" required style="width: 500px; height: 165px;"></textarea>
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger-outline"
+      (click)="showModal = false"
+    >
+      Cancelar
+    </button>
+    <button
+      type="button"
+      [clrLoading]="submitLoading"
+      class="btn btn-success"
+      (click)="onSave()"
+      [disabled]="!form.valid || submitLoading"
+    >
+      {{ buttonSubmitText }}
+    </button>
+  </div>
+</clr-modal>

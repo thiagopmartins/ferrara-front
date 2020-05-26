@@ -1,22 +1,22 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Customer } from "src/app/models/customer.model";
+import { Product } from "src/app/models/product.model";
 import { DialogService } from "src/app/providers/dialog.service";
-import { CustomerService } from "src/app/providers/customer.service";
+import { ProductService } from "src/app/providers/product.service";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
 
 @Component({
-  selector: "app-customers",
-  templateUrl: "./customers.component.html",
-  styleUrls: ["./customers.component.css"]
+  selector: "app-products",
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.css"]
 })
-export class CustomersComponent implements OnInit {
-  customers: Customer[] = [];
+export class ProductsComponent implements OnInit {
+  products: Product[] = [];
   controllers: string[] = [];
   erro: string[] = [];
-  customerSelected: Customer;
+  productSelected: Product;
   showModal: boolean;
   form: FormGroup;
   submitLoading: boolean = false;
@@ -24,37 +24,29 @@ export class CustomersComponent implements OnInit {
   value: string;
 
   constructor(
-    private customerService: CustomerService,
+    private productService: ProductService,
     private dialogService: DialogService,
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
       _id: [],
       name: ["", Validators.required],
-      phone: ["", Validators.required],
-      address: ["", Validators.required],
-      dateOfBirth: [""],
-      district: [""],
-      number: [],
-      block: [""],
-      aptoBlock: [""],
-      apto: [""],
-      lot: [""],
-      deliveryTax: [Validators.required],
-      referencePoint: [""]
+      description: ["", Validators.required],
+      category: ["", Validators.required],
+      price: [Validators.required],
     });
     this.controllers = Object.keys(this.form.controls);
   }
 
   ngOnInit() {
-    this.listCustomers();
+    this.listProducts();
   }
 
-  listCustomers() {
-    this.customers = [];
-    this.customerService.getAllCustomers().subscribe((data: {}) => {
+  listProducts() {
+    this.products = [];
+    this.productService.getAllProducts().subscribe((data: {}) => {
       for (const i in data) {
-        this.customers.push(data[i]);
+        this.products.push(data[i]);
       }
     });
   }
@@ -62,8 +54,8 @@ export class CustomersComponent implements OnInit {
   onCreate(): void {
     this.form.reset();
     this.submitLoading = false;
-    if (this.customerSelected) {
-      this.customerSelected = null;
+    if (this.productSelected) {
+      this.productSelected = null;
     }
     this.buttonSubmitText = "Cadastrar";
     this.showModal = true;
@@ -71,21 +63,21 @@ export class CustomersComponent implements OnInit {
 
   onSave(): void {
     this.submitLoading = true;
-    if (this.customerSelected) {
-      this.customerService.updateCustomer(this.form.value).subscribe(
+    if (this.productSelected) {
+      this.productService.updateProduct(this.form.value).subscribe(
         data => {
-          this.listCustomers();
+          this.listProducts();
           this.showModal = false;
-          this.dialogService.confirm(`Cliente salvo com sucesso.`);
+          this.dialogService.confirm(`Produto salvo com sucesso.`);
         },
         () => (this.submitLoading = false)
       );
     } else {
-      this.customerService.createCustomer(this.form.value).subscribe(
+      this.productService.createProduct(this.form.value).subscribe(
         data => {
-          this.listCustomers();
+          this.listProducts();
           this.showModal = false;
-          this.dialogService.confirm(`Cliente salvo com sucesso.`);
+          this.dialogService.confirm(`Produto salvo com sucesso.`);
         },
         () => (this.submitLoading = false)
       );
@@ -97,8 +89,8 @@ export class CustomersComponent implements OnInit {
     this.buttonSubmitText = "Salvar";
     this.submitLoading = false;
     this.form.reset();
-    this.customerService
-      .getCustomer(this.customerSelected._id)
+    this.productService
+      .getProduct(this.productSelected._id)
       .subscribe(data => {
         for (const controller of this.controllers) {
           this.form.controls[`${controller}`].setValue(data[`${controller}`]);
@@ -108,16 +100,16 @@ export class CustomersComponent implements OnInit {
 
   onDelete(): void {
     if (+localStorage.getItem("permission") !== PermissionEnum.owner) {
-      this.dialogService.confirm(`Sem permissão para deletar um cliente`);
+      this.dialogService.confirm(`Sem permissão para deletar um produto`);
     } else {
       this.dialogService
-        .confirm(`Deseja deletar o candidato ${this.customerSelected.name} ?`)
+        .confirm(`Deseja deletar o candidato ${this.productSelected.name} ?`)
         .then((canDelete: boolean) => {
           if (canDelete) {
-            this.customerService
-              .deleteCustomer(this.customerSelected._id)
+            this.productService
+              .deleteProduct(this.productSelected._id)
               .subscribe(() => {
-                this.listCustomers();
+                this.listProducts();
               });
           }
         });
