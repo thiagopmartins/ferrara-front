@@ -4,7 +4,6 @@ import { Customer } from "src/app/models/customer.model";
 import { DialogService } from "src/app/providers/dialog.service";
 import { CustomerService } from "src/app/providers/customer.service";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { Router } from "@angular/router";
 import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
 
 @Component({

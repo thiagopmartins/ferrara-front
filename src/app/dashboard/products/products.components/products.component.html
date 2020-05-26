@@ -35,8 +35,8 @@
   <clr-dg-column [clrDgField]="'price'">Preço</clr-dg-column>
   <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
     <clr-dg-cell>{{ product.name }}</clr-dg-cell>
-    <clr-dg-cell>{{ product.category }}</clr-dg-cell>
-    <clr-dg-cell currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [(ngModel)]="value">{{ product.price }}</clr-dg-cell>
+    <clr-dg-cell>{{ getCategoryName(product.category) }}</clr-dg-cell>
+    <clr-dg-cell>{{ transformToCurrency(product.price) }}</clr-dg-cell>
   </clr-dg-row>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">

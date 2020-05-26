@@ -4,7 +4,6 @@ import { Product } from "src/app/models/product.model";
 import { DialogService } from "src/app/providers/dialog.service";
 import { ProductService } from "src/app/providers/product.service";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { Router } from "@angular/router";
 import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
 
 @Component({
@@ -33,7 +32,7 @@ export class ProductsComponent implements OnInit {
       name: ["", Validators.required],
       description: ["", Validators.required],
       category: ["", Validators.required],
-      price: [Validators.required],
+      price: [0.00],
     });
     this.controllers = Object.keys(this.form.controls);
   }
@@ -63,6 +62,8 @@ export class ProductsComponent implements OnInit {
 
   onSave(): void {
     this.submitLoading = true;
+    this.form.value['price'] += this.getCategoryDefaultValue(this.form.value[`category`]);
+    console.log(this.getCategoryDefaultValue(this.form.value[`category`]));
     if (this.productSelected) {
       this.productService.updateProduct(this.form.value).subscribe(
         data => {
@@ -93,6 +94,9 @@ export class ProductsComponent implements OnInit {
       .getProduct(this.productSelected._id)
       .subscribe(data => {
         for (const controller of this.controllers) {
+          if (controller === 'price') {
+            data[`${controller}`] = data[`${controller}`] - this.getCategoryDefaultValue(data[`category`]);
+          }
           this.form.controls[`${controller}`].setValue(data[`${controller}`]);
         }
       });
@@ -114,5 +118,64 @@ export class ProductsComponent implements OnInit {
           }
         });
     }
+  }
+
+  transformToCurrency(num: string): string {
+    return `R$ ${parseFloat(num).toFixed(2)}`;
+  }
+
+  getCategoryName(category): string{
+    let name: string;
+    switch(+category) {
+      case 1: {
+        name = "Adicional/Borda";
+        break;
+      }
+      case 2: {
+        name = "Pizza Salgada 35cm";
+        break;
+      }
+      case 3: {
+        name = "Pizza Salgada 45cm";
+        break;
+      }
+      case 4: {
+        name = "Pizza Doce 30cm";
+        break;
+      }
+      case 5: {
+        name = "Pizza Doce 35cm";
+        break;
+      }
+      case 6: {
+        name = "Bebida";
+        break;
+      }
+    }
+
+    return name;
+  }
+
+  getCategoryDefaultValue(category): number {
+    let value: number;
+    switch(+category) {
+      case 2: {
+        value = 32.90;
+        break;
+      }
+      case 3: {
+        value = 47.90;
+        break;
+      }
+      case 5: {
+        value = 28.00;
+        break;
+      }
+      default: {
+        value = 0.00
+        break;
+      }
+    }
+    return value
   }
 }
