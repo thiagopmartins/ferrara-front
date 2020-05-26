@@ -168,7 +168,7 @@ export class ProductsComponent implements OnInit {
         break;
       }
       case 5: {
-        value = 28.00;
+        value = 29.90;
         break;
       }
       default: {
