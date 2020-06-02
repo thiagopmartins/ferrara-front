@@ -1,0 +1,136 @@
+<clr-datagrid
+  [(clrDgSingleSelected)]="discountSelected"
+  [clDgRowSelection]="true"
+>
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-sm btn-success-outline"
+        (click)="onCreate()"
+      >
+        <clr-icon shape="plus"></clr-icon> Cadastrar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-danger-outline"
+        (click)="onDelete()"
+        [disabled]="!discountSelected"
+      >
+        <clr-icon shape="close"></clr-icon> Deletar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-secondary"
+        (click)="onEdit()"
+        [disabled]="!discountSelected"
+      >
+        <clr-icon shape="pencil"></clr-icon> Editar
+      </button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-placeholder>Sem Cupons cadastrados!</clr-dg-placeholder>
+  <clr-dg-column [clrDgField]="'name'" [clrDgSortBy]="'name'" [clrDgSortOrder]="1">Nome</clr-dg-column>
+  <clr-dg-column [clrDgField]="'expirationDate'">Data de expiração</clr-dg-column>
+  <clr-dg-column [clrDgField]="'value'">Valor do cupom</clr-dg-column>
+  <clr-dg-row *clrDgItems="let discount of discounts" [clrDgItem]="discount">
+    <clr-dg-cell>{{ discount.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ transformDate(discount.expireDate) }}</clr-dg-cell>
+    <clr-dg-cell>{{ transformDiscountValueOnType(discount) }}</clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} de
+      {{ pagination.totalItems }} Cupons cadastrados
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'md'">
+  <h3 class="modal-title">Cupons</h3>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <section>
+        <div class="form-group">
+          <label for="name" class="required">Nome cupom</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="name"
+              size="58"
+              maxlength="55"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div class="form-group" style="padding-top: 0.5rem !important; width: 250px !important;">
+          <label for="type" class="required">Tipo do cupom</label>
+          <select input-delinea clrSelect name="type" formControlName="type" (change)="onChange($event)" style="width: 200px !important;">
+            <option value="1">Porcentagem</option>
+            <option value="2">Valor R$</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="value" class="required">Valor do cupom</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="value"
+              size="27"
+              maxlength="20"
+              autocomplete="off"
+              currencyMask
+              [(ngModel)]="value"
+              [options]="{ prefix: prefix, thousands: '.', decimal: ',' }"
+              placeholder=""
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="expireDate">Data de vencimento</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="date"
+              formControlName="expireDate"
+              size="14"
+            />
+          </label>
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger-outline"
+      (click)="showModal = false"
+    >
+      Cancelar
+    </button>
+    <button
+      type="button"
+      [clrLoading]="submitLoading"
+      class="btn btn-success"
+      (click)="onSave()"
+      [disabled]="!form.valid || submitLoading"
+    >
+      {{ buttonSubmitText }}
+    </button>
+  </div>
+</clr-modal>

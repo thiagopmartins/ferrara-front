@@ -22,6 +22,13 @@ const routes: Routes = [
         data: {
           title: 'Produtos'
         }
+      },
+      {
+        path: "cupons",
+        loadChildren: "./discounts/discounts.module#DiscountsModule",
+        data: {
+          title: 'Cupons'
+        }
       }
     ]
   }
