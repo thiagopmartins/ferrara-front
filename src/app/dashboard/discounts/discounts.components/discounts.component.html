@@ -62,13 +62,30 @@
               input-delinea
               type="text"
               formControlName="name"
-              size="58"
-              maxlength="55"
+              size="27"
+              maxlength="20"
               autocomplete="off"
             />
           </label>
         </div>
-        <div class="form-group" style="padding-top: 0.5rem !important; width: 250px !important;">
+        <div class="form-group">
+          <label for="partner">Parceiro</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="partner"
+              size="27"
+              maxlength="20"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div class="form-group" style="padding-top: 0.5rem !important; width: 254px !important;">
           <label for="type" class="required">Tipo do cupom</label>
           <select input-delinea clrSelect name="type" formControlName="type" (change)="onChange($event)" style="width: 200px !important;">
             <option value="1">Porcentagem</option>

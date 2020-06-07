@@ -6,4 +6,5 @@ export interface Discount {
   expireDate?: string;
   value?: number;
   type?: DiscountTypeEnum;
+  partner?: string;
 }

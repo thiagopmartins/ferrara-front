@@ -33,6 +33,7 @@ export class DiscountsComponent implements OnInit {
       _id: [],
       name: ["", Validators.required],
       expireDate: ["", Validators.required],
+      partner: [""],
       type: ["", Validators.required],
       value: [0.00],
     });
