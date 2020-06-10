@@ -60,6 +60,11 @@ export class DashboardComponent implements OnInit {
         title: "Cupons",
         icon: "tags",
         link: "./cupons"
+      },
+      {
+        title: "Pedidos",
+        icon: "shopping-cart",
+        link: "./pedidos"
       }
     ];
   }

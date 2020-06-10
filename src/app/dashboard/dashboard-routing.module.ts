@@ -29,6 +29,13 @@ const routes: Routes = [
         data: {
           title: 'Cupons'
         }
+      },
+      {
+        path: "pedidos",
+        loadChildren: "./orders/orders.module#OrdersModule",
+        data: {
+          title: 'Pedidos'
+        }
       }
     ]
   }

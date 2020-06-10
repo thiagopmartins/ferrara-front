@@ -1,0 +1,7 @@
+
+      <clr-accordion clrAccordionMultiPanel="true">
+        <clr-accordion-panel *ngFor="let panel of panels" [clrAccordionPanelOpen]="panel.open" (clrAccordionPanelOpenChange)="panelChange($event, panel)">
+          <clr-accordion-title>Panel ID: {{panel.id}}</clr-accordion-title>
+          <clr-accordion-content *clrIfExpanded>Content 1</clr-accordion-content>
+        </clr-accordion-panel>
+      </clr-accordion>
