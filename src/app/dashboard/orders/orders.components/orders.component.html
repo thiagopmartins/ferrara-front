@@ -1,7 +1,237 @@
 
-      <clr-accordion clrAccordionMultiPanel="true">
-        <clr-accordion-panel *ngFor="let panel of panels" [clrAccordionPanelOpen]="panel.open" (clrAccordionPanelOpenChange)="panelChange($event, panel)">
-          <clr-accordion-title>Panel ID: {{panel.id}}</clr-accordion-title>
-          <clr-accordion-content *clrIfExpanded>Content 1</clr-accordion-content>
-        </clr-accordion-panel>
-      </clr-accordion>
+  <input
+    input-delinea
+    type="text"
+    size="30"
+    maxlength="25"
+    id="search-custumer"
+    placeholder="Telefone cliente"
+    style="margin-right: 1rem !important;"
+    autocomplete="off"
+    (input)="phone=$event.target.value"
+  />
+  <button
+    type="button"
+    [clrLoading]="submitLoading"
+    class="btn btn-success"
+    (click)="searchCustomer($event)"
+  >
+  Pesquisar
+</button>
+<clr-accordion clrAccordionMultiPanel="true">
+  <clr-accordion-panel>
+    <clr-accordion-title>Cliente: {{customerSelected.name}}</clr-accordion-title>
+    <clr-accordion-content *clrIfExpanded><form [formGroup]="formCustomer" class="clr-form" autocomplete="off">
+      <section>
+        <clr-input-container class="form-group">
+          <label for="name" class="required">Nome do cliente</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="name"
+              size="72"
+              maxlength="68"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container>
+        <clr-input-container  class="form-group">
+          <label for="phone" class="required">Telefone</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="phone"
+              size="48"
+              maxlength="44"
+              autocomplete="off"
+              mask="(00) 0*"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="dateOfBirth">Data de Nascimento</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="date"
+              formControlName="dateOfBirth"
+              size="34"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="address" class="required">Endereço</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="address"
+              size="72"
+              maxlength="68"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="district">Bairro</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="district"
+              size="47"
+              maxlength="40"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="number">Número</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="number"
+              formControlName="number"
+              size="9"
+              maxlength="68"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="lot">Lote</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="lot"
+              size="16"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="block">Quadra</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="block"
+              size="14"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="aptoBlock">Bloco</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="aptoBlock"
+              size="14"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="apto">Apto</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="apto"
+              size="14"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="number" class="required">Taxa de entrega</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="deliveryTax"
+              size="16"
+              maxlength="68"
+              autocomplete="off"
+              currencyMask
+              [(ngModel)]="value"
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+              placeholder="R$ 0,00"
+            />
+          </label>
+        </clr-input-container >
+        <clr-input-container  class="form-group">
+          <label for="referencePoint">Ponto de Referência</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="referencePoint"
+              size="51"
+              maxlength="60"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container >
+      </section>
+    </form>
+  </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>

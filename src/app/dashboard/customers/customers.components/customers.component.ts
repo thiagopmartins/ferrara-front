@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { Customer } from "src/app/models/customer.model";
-import { DialogService } from "src/app/providers/dialog.service";
-import { CustomerService } from "src/app/providers/customer.service";
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
+import { Customer } from 'src/app/models/customer.model';
+import { DialogService } from 'src/app/providers/dialog.service';
+import { CustomerService } from 'src/app/providers/customer.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { PermissionEnum } from 'src/app/utils/enums/PermissionEnum';
 
 @Component({
-  selector: "app-customers",
-  templateUrl: "./customers.component.html",
-  styleUrls: ["./customers.component.css"]
+  selector: 'app-customers',
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
   customers: Customer[] = [];
@@ -18,7 +18,7 @@ export class CustomersComponent implements OnInit {
   customerSelected: Customer;
   showModal: boolean;
   form: FormGroup;
-  submitLoading: boolean = false;
+  submitLoading = false;
   buttonSubmitText: string;
   value: string;
 
@@ -29,18 +29,18 @@ export class CustomersComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       _id: [],
-      name: ["", Validators.required],
-      phone: ["", Validators.required],
-      address: ["", Validators.required],
-      dateOfBirth: [""],
-      district: [""],
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      dateOfBirth: [''],
+      district: [''],
       number: [],
-      block: [""],
-      aptoBlock: [""],
-      apto: [""],
-      lot: [""],
+      block: [''],
+      aptoBlock: [''],
+      apto: [''],
+      lot: [''],
       deliveryTax: [Validators.required],
-      referencePoint: [""]
+      referencePoint: ['']
     });
     this.controllers = Object.keys(this.form.controls);
   }
@@ -52,6 +52,7 @@ export class CustomersComponent implements OnInit {
   listCustomers() {
     this.customers = [];
     this.customerService.getAllCustomers().subscribe((data: {}) => {
+      // tslint:disable-next-line: forin
       for (const i in data) {
         this.customers.push(data[i]);
       }
@@ -64,7 +65,7 @@ export class CustomersComponent implements OnInit {
     if (this.customerSelected) {
       this.customerSelected = null;
     }
-    this.buttonSubmitText = "Cadastrar";
+    this.buttonSubmitText = 'Cadastrar';
     this.showModal = true;
   }
 
@@ -93,7 +94,7 @@ export class CustomersComponent implements OnInit {
 
   onEdit(): void {
     this.showModal = true;
-    this.buttonSubmitText = "Salvar";
+    this.buttonSubmitText = 'Salvar';
     this.submitLoading = false;
     this.form.reset();
     this.customerService
@@ -106,7 +107,7 @@ export class CustomersComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (+localStorage.getItem("permission") !== PermissionEnum.owner) {
+    if (+localStorage.getItem('permission') !== PermissionEnum.owner) {
       this.dialogService.confirm(`Sem permissão para deletar um cliente`);
     } else {
       this.dialogService

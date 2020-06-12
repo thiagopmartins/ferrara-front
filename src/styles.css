@@ -55,7 +55,7 @@ a:hover {
 }
 
 .form-group {
-  padding-top: 1.6rem;
+  padding-top: 0.7rem;
 }
 
 .form-group .btn-delinea {
@@ -112,4 +112,25 @@ a:hover {
 #no-login {
   margin-top: 0.7rem;
   text-align: center;
+}
+
+clr-input-container {
+  margin-top: 0 !important;
+}
+
+input {
+  font-weight: 300;
+  margin-right: 0.3rem;
+}
+
+.clr-form-control  {
+  margin-top: 0 !important;
+}
+
+label {
+  font-weight: 600;
+}
+
+.title-panel {
+  padding: 0.05rem !important;
 }

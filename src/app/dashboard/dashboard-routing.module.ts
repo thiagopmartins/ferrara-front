@@ -1,38 +1,38 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from "./dashboard.components/dashboard.component";
+import { DashboardComponent } from './dashboard.components/dashboard.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: DashboardComponent,
     children: [
-      { path: "", redirectTo: "/dashboard/clientes", pathMatch: "full" },
+      { path: '', redirectTo: '/dashboard/clientes', pathMatch: 'full' },
       {
-        path: "clientes",
-        loadChildren: "./customers/customers.module#CustomersModule",
+        path: 'clientes',
+        loadChildren: './customers/customers.module#CustomersModule',
         data: {
           title: 'Clientes'
         }
       },
       {
-        path: "produtos",
-        loadChildren: "./products/products.module#ProductsModule",
+        path: 'produtos',
+        loadChildren: './products/products.module#ProductsModule',
         data: {
           title: 'Produtos'
         }
       },
       {
-        path: "cupons",
-        loadChildren: "./discounts/discounts.module#DiscountsModule",
+        path: 'cupons',
+        loadChildren: './discounts/discounts.module#DiscountsModule',
         data: {
           title: 'Cupons'
         }
       },
       {
-        path: "pedidos",
-        loadChildren: "./orders/orders.module#OrdersModule",
+        path: 'pedidos',
+        loadChildren: './orders/orders.module#OrdersModule',
         data: {
           title: 'Pedidos'
         }
