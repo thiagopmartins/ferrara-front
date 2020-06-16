@@ -26,6 +26,7 @@
     "@clr/angular": "^2.0.0",
     "@clr/icons": "^2.0.0",
     "@clr/ui": "^2.0.0",
+    "@types/rx": "^4.1.2",
     "@webcomponents/custom-elements": "^1.0.0",
     "core-js": "^2.5.4",
     "ng2-currency-mask": "^5.3.1",

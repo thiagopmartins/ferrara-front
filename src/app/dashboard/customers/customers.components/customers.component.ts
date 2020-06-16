@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Customer } from 'src/app/models/customer.model';
 import { DialogService } from 'src/app/providers/dialog.service';
@@ -25,6 +26,7 @@ export class CustomersComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private dialogService: DialogService,
+    private router: Router,
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
@@ -122,5 +124,10 @@ export class CustomersComponent implements OnInit {
           }
         });
     }
+  }
+  onOrder(): void {
+    this.router.navigate(['dashboard/pedidos'], {
+      queryParams: { phone: this.customerSelected.phone },
+    });
   }
 }

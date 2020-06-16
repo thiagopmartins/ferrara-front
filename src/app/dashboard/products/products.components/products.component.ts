@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { Product } from "src/app/models/product.model";
-import { DialogService } from "src/app/providers/dialog.service";
-import { ProductService } from "src/app/providers/product.service";
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { PermissionEnum } from "src/app/utils/enums/PermissionEnum";
+import { Product } from 'src/app/models/product.model';
+import { DialogService } from 'src/app/providers/dialog.service';
+import { ProductService } from 'src/app/providers/product.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { PermissionEnum } from 'src/app/utils/enums/PermissionEnum';
 
 @Component({
-  selector: "app-products",
-  templateUrl: "./products.component.html",
-  styleUrls: ["./products.component.css"]
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   productSelected: Product;
   showModal: boolean;
   form: FormGroup;
-  submitLoading: boolean = false;
+  submitLoading = false;
   buttonSubmitText: string;
   value: string;
 
@@ -29,9 +29,9 @@ export class ProductsComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       _id: [],
-      name: ["", Validators.required],
-      description: ["", Validators.required],
-      category: ["", Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      category: ['', Validators.required],
       price: [0.00],
     });
     this.controllers = Object.keys(this.form.controls);
@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit {
   listProducts() {
     this.products = [];
     this.productService.getAllProducts().subscribe((data: {}) => {
+      // tslint:disable-next-line: forin
       for (const i in data) {
         this.products.push(data[i]);
       }
@@ -56,7 +57,7 @@ export class ProductsComponent implements OnInit {
     if (this.productSelected) {
       this.productSelected = null;
     }
-    this.buttonSubmitText = "Cadastrar";
+    this.buttonSubmitText = 'Cadastrar';
     this.showModal = true;
   }
 
@@ -87,7 +88,7 @@ export class ProductsComponent implements OnInit {
 
   onEdit(): void {
     this.showModal = true;
-    this.buttonSubmitText = "Salvar";
+    this.buttonSubmitText = 'Salvar';
     this.submitLoading = false;
     this.form.reset();
     this.productService
@@ -103,7 +104,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (+localStorage.getItem("permission") !== PermissionEnum.owner) {
+    if (+localStorage.getItem('permission') !== PermissionEnum.owner) {
       this.dialogService.confirm(`Sem permissão para deletar um produto`);
     } else {
       this.dialogService
@@ -124,31 +125,31 @@ export class ProductsComponent implements OnInit {
     return `R$ ${parseFloat(num).toFixed(2)}`;
   }
 
-  getCategoryName(category): string{
+  getCategoryName(category): string {
     let name: string;
-    switch(+category) {
+    switch (+category) {
       case 1: {
-        name = "Adicional/Borda";
+        name = 'Adicional/Borda';
         break;
       }
       case 2: {
-        name = "Pizza Salgada 35cm";
+        name = 'Pizza Salgada 35cm';
         break;
       }
       case 3: {
-        name = "Pizza Salgada 45cm";
+        name = 'Pizza Salgada 45cm';
         break;
       }
       case 4: {
-        name = "Pizza Doce 30cm";
+        name = 'Pizza Doce 30cm';
         break;
       }
       case 5: {
-        name = "Pizza Doce 35cm";
+        name = 'Pizza Doce 35cm';
         break;
       }
       case 6: {
-        name = "Bebida";
+        name = 'Bebida';
         break;
       }
     }
@@ -158,7 +159,7 @@ export class ProductsComponent implements OnInit {
 
   getCategoryDefaultValue(category): number {
     let value: number;
-    switch(+category) {
+    switch (+category) {
       case 2: {
         value = 32.90;
         break;
@@ -172,10 +173,10 @@ export class ProductsComponent implements OnInit {
         break;
       }
       default: {
-        value = 0.00
+        value = 0.00;
         break;
       }
     }
-    return value
+    return value;
   }
 }

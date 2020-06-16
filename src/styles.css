@@ -37,6 +37,19 @@ a:hover {
   font-weight: 500;
 }
 
+label {
+  font-weight: 600;
+}
+
+clr-input-container {
+  margin-top: 0 !important;
+}
+
+input {
+  font-weight: 300;
+  margin-right: 0.3rem;
+}
+
 [input-delinea] {
   border-radius: 3px !important;
   border-style: solid !important;
@@ -105,6 +118,23 @@ a:hover {
   padding: 1rem 10% 0px;
 }
 
+.clr-form-control  {
+  margin-top: 0 !important;
+}
+
+.title-panel {
+  padding: 0.05rem !important;
+}
+
+.datagrid-placeholder {
+  display: none !important;
+}
+
+.products-grid > .datagrid {
+  background-color: #fff5cc;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace !important;
+}
+
 #btn-login {
   margin-top: 1.2rem;
 }
@@ -112,25 +142,4 @@ a:hover {
 #no-login {
   margin-top: 0.7rem;
   text-align: center;
-}
-
-clr-input-container {
-  margin-top: 0 !important;
-}
-
-input {
-  font-weight: 300;
-  margin-right: 0.3rem;
-}
-
-.clr-form-control  {
-  margin-top: 0 !important;
-}
-
-label {
-  font-weight: 600;
-}
-
-.title-panel {
-  padding: 0.05rem !important;
 }
