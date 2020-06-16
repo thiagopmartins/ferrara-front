@@ -236,20 +236,24 @@
     </clr-accordion-content>
   </clr-accordion-panel>
   <clr-accordion-panel>
-    <clr-accordion-title>Pedido: R$ 0,00</clr-accordion-title>
+    <clr-accordion-title>Pedido: {{ transformToCurrency(orderPrice.toString()) }}</clr-accordion-title>
     <clr-accordion-content *clrIfExpanded>
       <clr-datagrid
         class="datagrid-compact products-grid"
         style="min-height: 0 !important; padding: 0 !important;"
       >
+        <clr-dg-column>Tipo</clr-dg-column>
+        <clr-dg-column>Borda</clr-dg-column>
         <clr-dg-column>Produto</clr-dg-column>
         <clr-dg-column>Valor</clr-dg-column>
         <clr-dg-row
           *clrDgItems="let product of productsOfOrder"
           [clrDgItem]="product"
         >
-          <clr-dg-cell>{{ product.name }}</clr-dg-cell>
-          <clr-dg-cell>{{ transformToCurrency(product.price) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getCategoryName(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getAdditionalItem(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getProductName(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getPriceProductOfOrder(product) }}</clr-dg-cell>
           <clr-dg-action-overflow>
             <button class="action-item" (click)="onEdit(product)">
               Editar

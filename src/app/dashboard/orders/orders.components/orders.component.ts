@@ -10,6 +10,11 @@ import { Product } from 'src/app/models/product.model';
 import { CategoryEnum } from 'src/app/utils/enums/CategoryEnum';
 import { ProductService } from 'src/app/providers/product.service';
 
+interface ProductOfOrder {
+  products: Product[],
+  additional: Product
+}
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -37,12 +42,13 @@ export class OrdersComponent implements OnInit {
   phone: string;
   productCategory: CategoryEnum;
   products: Product[] = [];
-  productsOfOrder: Product[] = [];
+  productsOfOrder: ProductOfOrder[] = [];
   productsFiltred: Product[] = [];
   additionalsFiltred: Product[] = [];
 
   blockCheckboxProduct: Boolean = false;
   blockCheckboxAdditionals: Boolean = false;
+  orderPrice: number = 0;
 
   constructor(
     private activiteRouter: ActivatedRoute,
@@ -120,12 +126,23 @@ export class OrdersComponent implements OnInit {
     return `R$ ${parseFloat(num).toFixed(2)}`;
   }
 
+  getPriceProductOfOrder(order: ProductOfOrder): string {
+    let price = 0;
+    const productMax = order.products.reduce((prev, current) => (prev.price > current.price) ? prev : current);
+    price = productMax.price;
+    if (order.additional !== undefined && order.additional !== undefined)
+      price += order.additional.price;
+    return `R$ ${parseFloat(`${price}`).toFixed(2)}`;
+  }
+
   wizardProducts(): void {
     this.wizardExtraLarge.close();
     this.wizardExtraLarge.reset();
     this.additionalsFiltred = [];
     this.productsFiltred = [];
     this.productCategory = null;
+    this.blockCheckboxProduct = false;
+    this.blockCheckboxAdditionals = false;
     this.xlOpen = true;
   }
 
@@ -162,7 +179,69 @@ export class OrdersComponent implements OnInit {
   }
 
   checkedAdditionals(): void {
-    console.log(this.additionalsFiltred)
     this.blockCheckboxAdditionals = this.additionalsFiltred.filter(p => p['isChecked']).length >= 1;
+  }
+
+  requestOrder() {
+    const product: Product[] = this.productsFiltred.filter(p => p['isChecked']);
+    const additional: Product = this.additionalsFiltred.filter(p => p['isChecked'])[0];
+    
+    this.productsOfOrder.push({
+      additional: this.additionalsFiltred.filter(p => p['isChecked'])[0],
+      products: product
+    });
+
+    const productMax = product.reduce((prev, current) => (prev.price > current.price) ? prev : current);
+    this.orderPrice += productMax.price;
+
+    if (additional !== undefined && additional !== null)
+      this.orderPrice += additional.price;    
+  }
+
+  getAdditionalItem(order: ProductOfOrder): string {
+    if (order.additional === null || order.additional === undefined)
+      return '-';
+    else
+      return order.additional.name;
+  }
+
+  getProductName(order: ProductOfOrder): string {
+    if (order.products.length > 1){
+      return `${order.products[0].name}/${order.products[1].name}`;
+    } else {
+      return `${order.products[0].name}`;
+    }
+  }
+
+  getCategoryName(order: ProductOfOrder): string {
+    let name: string;
+    switch (+order.products[0].category) {
+      case 1: {
+        name = 'Adicional/Borda';
+        break;
+      }
+      case 2: {
+        name = 'Pizza Salgada 35cm';
+        break;
+      }
+      case 3: {
+        name = 'Pizza Salgada 45cm';
+        break;
+      }
+      case 4: {
+        name = 'Pizza Doce 30cm';
+        break;
+      }
+      case 5: {
+        name = 'Pizza Doce 35cm';
+        break;
+      }
+      case 6: {
+        name = 'Bebida';
+        break;
+      }
+    }
+
+    return name;
   }
 }
