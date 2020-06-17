@@ -22,7 +22,7 @@ export class DiscountsComponent implements OnInit {
   submitLoading = false;
   buttonSubmitText: string;
   value: string;
-  prefix: string;
+  prefix: string = 'R$ ';
 
   constructor(
     private discountService: DiscountService,
@@ -54,7 +54,6 @@ export class DiscountsComponent implements OnInit {
         }
         this.discounts.push(data[i]);
       }
-      console.log(data);
     });
   }
 

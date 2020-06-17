@@ -2,6 +2,10 @@ clr-accordion {
   padding: 0.7rem !important;
 }
 
+h5 {
+  margin:0;
+}
+
 .form .form-group, form .form-group {
     padding-left: 0 !important;
     padding-top: 0 !important;
@@ -18,4 +22,8 @@ clr-accordion {
 
 #search-custumer{
   margin: 0.5rem 0 0 0.7rem !important;
+}
+
+#details-order {
+  margin: 1rem;
 }

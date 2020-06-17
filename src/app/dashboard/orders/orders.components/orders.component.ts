@@ -9,6 +9,10 @@ import { Customer } from 'src/app/models/customer.model';
 import { Product } from 'src/app/models/product.model';
 import { CategoryEnum } from 'src/app/utils/enums/CategoryEnum';
 import { ProductService } from 'src/app/providers/product.service';
+import { Order } from 'src/app/models/order.model';
+import { Discount } from 'src/app/models/discount.model';
+import { DiscountService } from 'src/app/providers/discount.service';
+import { DiscountTypeEnum } from 'src/app/utils/enums/DiscountTypeEnum';
 
 interface ProductOfOrder {
   products: Product[],
@@ -49,10 +53,21 @@ export class OrdersComponent implements OnInit {
   blockCheckboxProduct: Boolean = false;
   blockCheckboxAdditionals: Boolean = false;
   orderPrice: number = 0;
+  order: Order = {
+    price: 0.00
+  };
+  
+  discounts: Discount[] = [];
+  discountFiltred: Discount = {
+    value: 0.00,
+    type: DiscountTypeEnum.value
+  };
+  discountName: string;
 
   constructor(
     private activiteRouter: ActivatedRoute,
     private customerService: CustomerService,
+    private discountService: DiscountService,
     private dialogService: DialogService,
     private productService: ProductService,
     private fb: FormBuilder,
@@ -70,7 +85,7 @@ export class OrdersComponent implements OnInit {
       aptoBlock: [''],
       apto: [''],
       lot: [''],
-      deliveryTax: [Validators.required],
+      deliveryTax: [0.00, Validators.required],
       referencePoint: [''],
     });
 
@@ -86,6 +101,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.listCustomers();
     this.listProducts();
+    this.listDiscounts();
   }
 
   listCustomers() {
@@ -123,6 +139,9 @@ export class OrdersComponent implements OnInit {
     }
   }
   transformToCurrency(num: string): string {
+    console.log(this.discountFiltred)
+    if (num === null || num === undefined)
+      num = '0.00';
     return `R$ ${parseFloat(num).toFixed(2)}`;
   }
 
@@ -143,6 +162,10 @@ export class OrdersComponent implements OnInit {
     this.productCategory = null;
     this.blockCheckboxProduct = false;
     this.blockCheckboxAdditionals = false;
+    this.discountFiltred = {
+      value: 0.00,
+      type: DiscountTypeEnum.value
+    };
     this.xlOpen = true;
   }
 
@@ -185,7 +208,7 @@ export class OrdersComponent implements OnInit {
   requestOrder() {
     const product: Product[] = this.productsFiltred.filter(p => p['isChecked']);
     const additional: Product = this.additionalsFiltred.filter(p => p['isChecked'])[0];
-    
+
     this.productsOfOrder.push({
       additional: this.additionalsFiltred.filter(p => p['isChecked'])[0],
       products: product
@@ -196,6 +219,19 @@ export class OrdersComponent implements OnInit {
 
     if (additional !== undefined && additional !== null)
       this.orderPrice += additional.price;    
+
+    this.reloadOrderPrice();
+  }
+
+  reloadOrderPrice(): void {
+    this.order.price = this.orderPrice + (+this.getDeliveryTax() | 0); // SUBTRAIR O VALOR DO DESCONTO
+
+    if (+this.discountFiltred.type === DiscountTypeEnum.value) {
+      this.order.price -= this.discountFiltred.value;
+    } 
+    else if (+this.discountFiltred.type === DiscountTypeEnum.percentage){
+      this.order.price -= this.order.price *  this.discountFiltred.value/100;
+    }
   }
 
   getAdditionalItem(order: ProductOfOrder): string {
@@ -243,5 +279,39 @@ export class OrdersComponent implements OnInit {
     }
 
     return name;
+  }
+
+  getDeliveryTax(): string {
+      return this.formCustomer.controls['deliveryTax'].value;
+  }
+
+  listDiscounts(): void {
+    this.discounts = [];
+    this.discountService.getAllDiscounts().subscribe((data: {}) => {
+      for (const i in data) {
+        if (i === 'expireDate') {
+          data[i] = new Date(data[i]).toDateString();
+        }
+        this.discounts.push(data[i]);
+      }
+    });
+  }
+
+  searchDiscount() {
+    if (this.discountName === null || this.discountName === undefined) {
+      this.dialogService.confirm(
+        `Digite o nome de um cupom`
+      );
+    } else {
+      this.discountFiltred = this.discounts.filter(
+        (m) => m.name === this.discountName.trim()
+      )[0];
+      if (this.discountFiltred === null || this.discountFiltred === undefined) {
+        this.discountFiltred.value = 0.00;
+        this.dialogService.confirm(`Cupom não encontrado`);
+      } else {
+        this.reloadOrderPrice();
+      }
+    }
   }
 }
