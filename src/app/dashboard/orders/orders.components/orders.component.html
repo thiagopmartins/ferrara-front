@@ -391,7 +391,7 @@
     autocomplete="off"
     (input)="change = $event.target.value"
     style="margin-top: 1rem;"
-    [hidden]="payment !== '1'"
+    [hidden]="!paymentIsMoney()"
   />
 </div>
 

@@ -347,4 +347,8 @@ export class OrdersComponent implements OnInit {
   getChange(): string {
     return (this.change - this.order.price).toString();
   }
+
+  paymentIsMoney(): Boolean {
+    return +this.payment === PaymentEnum.money;
+  }
 }
