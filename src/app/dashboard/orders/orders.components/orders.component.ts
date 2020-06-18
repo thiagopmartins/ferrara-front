@@ -13,10 +13,11 @@ import { Order } from 'src/app/models/order.model';
 import { Discount } from 'src/app/models/discount.model';
 import { DiscountService } from 'src/app/providers/discount.service';
 import { DiscountTypeEnum } from 'src/app/utils/enums/DiscountTypeEnum';
+import { PaymentEnum } from 'src/app/utils/enums/PaymentEnum';
 
 interface ProductOfOrder {
-  products: Product[],
-  additional: Product
+  products: Product[];
+  additional: Product;
 }
 
 @Component({
@@ -52,17 +53,21 @@ export class OrdersComponent implements OnInit {
 
   blockCheckboxProduct: Boolean = false;
   blockCheckboxAdditionals: Boolean = false;
-  orderPrice: number = 0;
+  orderPrice = 0;
   order: Order = {
     price: 0.00
   };
-  
+
   discounts: Discount[] = [];
   discountFiltred: Discount = {
     value: 0.00,
     type: DiscountTypeEnum.value
   };
   discountName: string;
+
+  payment: PaymentEnum;
+
+  change = 0.00;
 
   constructor(
     private activiteRouter: ActivatedRoute,
@@ -139,9 +144,9 @@ export class OrdersComponent implements OnInit {
     }
   }
   transformToCurrency(num: string): string {
-    console.log(this.discountFiltred)
-    if (num === null || num === undefined)
+    if (num === null || num === undefined) {
       num = '0.00';
+    }
     return `R$ ${parseFloat(num).toFixed(2)}`;
   }
 
@@ -149,8 +154,9 @@ export class OrdersComponent implements OnInit {
     let price = 0;
     const productMax = order.products.reduce((prev, current) => (prev.price > current.price) ? prev : current);
     price = productMax.price;
-    if (order.additional !== undefined && order.additional !== undefined)
+    if (order.additional !== undefined && order.additional !== undefined) {
       price += order.additional.price;
+    }
     return `R$ ${parseFloat(`${price}`).toFixed(2)}`;
   }
 
@@ -217,32 +223,34 @@ export class OrdersComponent implements OnInit {
     const productMax = product.reduce((prev, current) => (prev.price > current.price) ? prev : current);
     this.orderPrice += productMax.price;
 
-    if (additional !== undefined && additional !== null)
-      this.orderPrice += additional.price;    
+    if (additional !== undefined && additional !== null) {
+      this.orderPrice += additional.price;
+    }
 
     this.reloadOrderPrice();
   }
 
   reloadOrderPrice(): void {
+    // tslint:disable-next-line: no-bitwise
     this.order.price = this.orderPrice + (+this.getDeliveryTax() | 0); // SUBTRAIR O VALOR DO DESCONTO
 
     if (+this.discountFiltred.type === DiscountTypeEnum.value) {
       this.order.price -= this.discountFiltred.value;
-    } 
-    else if (+this.discountFiltred.type === DiscountTypeEnum.percentage){
-      this.order.price -= this.order.price *  this.discountFiltred.value/100;
+    } else if (+this.discountFiltred.type === DiscountTypeEnum.percentage) {
+      this.order.price -= this.order.price *  this.discountFiltred.value / 100;
     }
   }
 
   getAdditionalItem(order: ProductOfOrder): string {
-    if (order.additional === null || order.additional === undefined)
+    if (order.additional === null || order.additional === undefined) {
       return '-';
-    else
+    } else {
       return order.additional.name;
+    }
   }
 
   getProductName(order: ProductOfOrder): string {
-    if (order.products.length > 1){
+    if (order.products.length > 1) {
       return `${order.products[0].name}/${order.products[1].name}`;
     } else {
       return `${order.products[0].name}`;
@@ -288,6 +296,7 @@ export class OrdersComponent implements OnInit {
   listDiscounts(): void {
     this.discounts = [];
     this.discountService.getAllDiscounts().subscribe((data: {}) => {
+      // tslint:disable-next-line: forin
       for (const i in data) {
         if (i === 'expireDate') {
           data[i] = new Date(data[i]).toDateString();
@@ -298,6 +307,7 @@ export class OrdersComponent implements OnInit {
   }
 
   searchDiscount() {
+    console.log(this.payment);
     if (this.discountName === null || this.discountName === undefined) {
       this.dialogService.confirm(
         `Digite o nome de um cupom`
@@ -313,5 +323,28 @@ export class OrdersComponent implements OnInit {
         this.reloadOrderPrice();
       }
     }
+  }
+
+  getPaymentName(payment: PaymentEnum): string {
+    let name: string;
+    switch (payment) {
+      case 1: {
+        name = 'Dinheiro';
+        break;
+      }
+      case 2: {
+        name = 'Cartão de Débito';
+        break;
+      }
+      case 3: {
+        name = 'Cartão de Crédito';
+        break;
+      }
+    }
+    return name;
+  }
+
+  getChange(): string {
+    return (this.change - this.order.price).toString();
   }
 }
