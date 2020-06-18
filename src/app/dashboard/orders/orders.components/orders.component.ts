@@ -351,4 +351,8 @@ export class OrdersComponent implements OnInit {
   paymentIsMoney(): Boolean {
     return +this.payment === PaymentEnum.money;
   }
+
+  onDelete(order: ProductOfOrder): void {
+    this.productsOfOrder = this.productsOfOrder.filter(p => p !== order);
+  }
 }
