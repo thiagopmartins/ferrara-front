@@ -401,7 +401,7 @@
   <h5>
     Valor do cupom: {{ transformToCurrency(discountFiltred.value.toString()) }}
   </h5>
-  <h5 [hidden]="change === 0">
+  <h5 [hidden]="!paymentIsMoney()">
     Troco: {{ transformToCurrency(getChange()) }}
   </h5>
   <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
