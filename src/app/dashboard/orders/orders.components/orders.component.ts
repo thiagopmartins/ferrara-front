@@ -68,6 +68,7 @@ export class OrdersComponent implements OnInit {
   payment: PaymentEnum;
 
   change = 0.00;
+  custumizeMoneyPayment = 0.00;
 
   constructor(
     private activiteRouter: ActivatedRoute,
@@ -345,6 +346,23 @@ export class OrdersComponent implements OnInit {
   }
 
   getChange(): string {
-    return (this.change - this.order.price).toString();
+    let change: number = this.change - (+this.payment === PaymentEnum.moneyAndCard ? this.custumizeMoneyPayment : this.order.price);
+    if (change < 0) {
+      change = 0.00;
+    }
+    return change.toString();
+  }
+
+  getCardPayment(): string {
+    let cardPay: number = this.order.price - this.custumizeMoneyPayment;
+    if (cardPay < 0) {
+      cardPay = 0.00;
+    }
+
+    return cardPay.toString();
+  }
+
+  showPrinterModal(): void {
+    this.showModal = true;
   }
 }

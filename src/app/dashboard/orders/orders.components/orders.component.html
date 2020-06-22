@@ -276,8 +276,102 @@
       </button>
     </clr-accordion-content>
   </clr-accordion-panel>
-</clr-accordion>
+  <clr-accordion-panel>
+    <clr-accordion-title
+      >Forma de Pagamento - Valor Final:
+      {{ transformToCurrency(order.price.toString()) }}</clr-accordion-title
+    >
+    <clr-accordion-content *clrIfExpanded>
+      <div class="clr-row" style="margin-top: 1rem;">
+        <div class="clr-col-5">
+          <input
+            input-delinea
+            type="text"
+            size="30"
+            maxlength="25"
+            placeholder="Cupom de desconto"
+            style="margin: 0 0.7rem !important;"
+            autocomplete="off"
+            (input)="discountName = $event.target.value"
+          />
+          <button
+            type="button"
+            class="btn btn-icon"
+            aria-label="tags"
+            (click)="searchDiscount()"
+          >
+            <clr-icon shape="tags"></clr-icon>
+          </button>
 
+          <div
+            style="
+              padding-top: 0.5rem !important;
+              width: 200px !important;
+              margin-left: 0.7rem !important;
+            "
+          >
+            <label for="payment" class="required">Forma de Pagamento</label>
+            <select
+              input-delinea
+              clrSelect
+              name="payment"
+              [(ngModel)]="payment"
+              style="width: 175px !important;"
+            >
+              <option value="1">Dinheiro</option>
+              <option value="2">Cartão de Débito</option>
+              <option value="3">Cartão de Crédito</option>
+              <option value="4">Dinheiro e Cartão</option>
+            </select>
+            <input
+              input-delinea
+              type="text"
+              size="20"
+              maxlength="25"
+              placeholder="Valor pago em dinheiro"
+              autocomplete="off"
+              (input)="custumizeMoneyPayment = $event.target.value"
+              style="margin-top: 1rem;"
+              [hidden]="payment !== '4'"
+            />
+            <input
+              input-delinea
+              type="text"
+              size="20"
+              maxlength="25"
+              placeholder="Troco para"
+              autocomplete="off"
+              (input)="change = $event.target.value"
+              style="margin-top: 1rem;"
+              [hidden]="payment !== '1' && payment !== '4'"
+            />
+          </div>
+        </div>
+        <div id="details-order" class="clr-col-6">
+          <h5>
+            Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}
+          </h5>
+          <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
+          <h5>
+            Valor do cupom:
+            {{ transformToCurrency(discountFiltred.value.toString()) }}
+          </h5>
+          <h5 [hidden]="payment !== '4'">
+            Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
+          </h5>
+          <h5 [hidden]="payment !== '4'">
+            Valor à pagar no Dinheiro:
+            {{ transformToCurrency(custumizeMoneyPayment) }}
+          </h5>
+          <h5 [hidden]="change === 0">
+            Troco: {{ transformToCurrency(getChange()) }}
+          </h5>
+          <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
+        </div>
+      </div>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
 <clr-wizard #wizardxl [(clrWizardOpen)]="xlOpen">
   <clr-wizard-title></clr-wizard-title>
 
@@ -344,65 +438,18 @@
   </clr-wizard-page>
 </clr-wizard>
 
-<input
-  input-delinea
-  type="text"
-  size="30"
-  maxlength="25"
-  placeholder="Cupom de desconto"
-  style="margin: 0 0.7rem !important;"
-  autocomplete="off"
-  (input)="discountName = $event.target.value"
-/>
-<button
-  type="button"
-  class="btn btn-icon"
-  aria-label="tags"
-  (click)="searchDiscount()"
->
-  <clr-icon shape="tags"></clr-icon>
+<button type="button" class="btn btn-success" (click)="showPrinterModal()">
+  Imprimir
 </button>
 
-<div
-  style="
-    padding-top: 0.5rem !important;
-    width: 200px !important;
-    margin-left: 0.7rem !important;
-  "
->
-  <label for="payment" class="required">Forma de Pagamento</label>
-  <select
-    input-delinea
-    clrSelect
-    name="payment"
-    [(ngModel)]="payment"
-    style="width: 175px !important;"
-  >
-    <option value="1">Dinheiro</option>
-    <option value="2">Cartão de Débito</option>
-    <option value="3">Cartão de Crédito</option>
-  </select>
-  <input
-    input-delinea
-    type="text"
-    size="20"
-    maxlength="25"
-    placeholder="Troco para"
-    autocomplete="off"
-    (input)="change = $event.target.value"
-    style="margin-top: 1rem;"
-    [hidden]="payment !== '1'"
-  />
-</div>
-
-<div id="details-order">
-  <h5>Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}</h5>
-  <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
-  <h5>
-    Valor do cupom: {{ transformToCurrency(discountFiltred.value.toString()) }}
-  </h5>
-  <h5 [hidden]="change === 0">
-    Troco: {{ transformToCurrency(getChange()) }}
-  </h5>
-  <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
-</div>
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'">
+  <div class="modal-body">
+    <img center src="../../../assets/logo-printer.png" />
+    <tr>
+      <td>TESTE</td>
+      <td>TESTE</td>
+      <td>TESTE</td>
+      <td>TESTE</td>
+    </tr>
+  </div>
+</clr-modal>

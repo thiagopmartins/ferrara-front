@@ -6,6 +6,11 @@ h5 {
   margin:0;
 }
 
+img {
+  width: auto;
+  height: 80px;
+}
+
 .form .form-group, form .form-group {
     padding-left: 0 !important;
     padding-top: 0 !important;
