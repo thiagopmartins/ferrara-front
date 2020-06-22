@@ -26,6 +26,10 @@ form .form-group {
     font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace !important;
 }
 
+.print {
+    display: none;
+}
+
 #search-custumer {
     margin: 0.5rem 0 0 0.7rem !important;
 }

@@ -209,24 +209,19 @@
         </div>
     </clr-wizard-page>
 </clr-wizard>
-
-<button type="button" class="btn btn-success" (click)="showPrinterModal()">
+<div class="clr-col-sm-12 clr-col-md-12">
+    <button type="button" class="btn btn-success" [useExistingCss]="true" printSectionId="print" ngxPrint>
   Imprimir
 </button>
+</div>
 
 
-<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'">
-    <div class="modal-body print" id="print">
-        <img center src="../../../assets/logo-printer.png" />
-        <tr>
-            <td>TESTE</td>
-            <td>TESTE</td>
-            <td>TESTE</td>
-            <td>TESTE</td>
-        </tr>
-
-        <button type="button" class="btn btn-success" [useExistingCss]="true" printSectionId="print" ngxPrint>
-      Imprimir
-    </button>
-    </div>
-</clr-modal>
+<div class="modal-body print" id="print">
+    <img center src="../../../assets/logo-printer.png" />
+    <tr>
+        <td>TESTE</td>
+        <td>TESTE</td>
+        <td>TESTE</td>
+        <td>TESTE</td>
+    </tr>
+</div>
