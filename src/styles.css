@@ -1,5 +1,5 @@
 body {
-  background-color: #fafafa;
+    background-color: #fafafa;
 }
 
 input[type="date"]:not([readonly]),
@@ -11,142 +11,141 @@ input[type="tel"]:not([readonly]),
 input[type="text"]:not([readonly]),
 input[type="time"]:not([readonly]),
 input[type="url"]:not([readonly]) {
-  background: none !important;
+    background: none !important;
 }
 
 button:focus {
-  outline: 0;
+    outline: 0;
 }
 
 a {
-  color: #00b0ef;
+    color: #00b0ef;
 }
 
 clr-datagrid {
-  padding: 0 2%;
-  min-height: 250px;
+    padding: 0 2%;
+    min-height: 250px;
 }
 
 a:visited {
-  color: #00b0ef;
-  text-decoration: none;
+    color: #00b0ef;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
-  font-weight: 500;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 label {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 clr-input-container {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 input {
-  font-weight: 300;
-  margin-right: 0.3rem;
+    font-weight: 300;
+    margin-right: 0.3rem;
 }
 
 [input-delinea] {
-  border-radius: 3px !important;
-  border-style: solid !important;
-  font-size: 14px;
-  justify-content: space-between;
-  border-color: rgb(223, 225, 230) !important;
-  border-width: 2px !important;
-  padding: 6px !important;
-  min-height: 40px;
-  color: #4e4e4e !important;
+    border-radius: 3px !important;
+    border-style: solid !important;
+    font-size: 14px;
+    justify-content: space-between;
+    border-color: rgb(223, 225, 230) !important;
+    border-width: 2px !important;
+    padding: 6px !important;
+    min-height: 40px;
+    color: #4e4e4e !important;
 }
 
 [input-delinea]:focus {
-  border-color: rgba(183, 6, 6, 0.4) !important;
-  background: none;
+    border-color: rgba(183, 6, 6, 0.4) !important;
+    background: none;
 }
 
-
 [center] {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form-group {
-  padding-top: 0.7rem;
+    padding-top: 0.7rem;
 }
 
 .form-group .btn-delinea {
-  margin-top: 200px;
+    margin-top: 200px;
 }
 
 .btn-delinea {
-  border-color: #b70606;
-  background-color: #b70606;
-  color: #fff;
-  transition: 0.25s;
+    border-color: #b70606;
+    background-color: #b70606;
+    color: #fff;
+    transition: 0.25s;
 }
 
 .btn-delinea:hover {
-  background-color: #800101 !important;
-  border-color: #800101;
-  color: #fff !important;
+    background-color: #800101 !important;
+    border-color: #800101;
+    color: #fff !important;
 }
 
 .btn-delinea:focus,
 .btn-delinea-outline:focus {
-  outline: none;
+    outline: none;
 }
 
 .btn-delinea:active,
 .btn-delinea-outline:active {
-  box-shadow: 0 2px 0 0 #7a9828 inset;
+    box-shadow: 0 2px 0 0 #7a9828 inset;
 }
 
 .btn-delinea-outline {
-  background-color: rgba(166, 206, 57, 0.09);
-  color: #b70606;
-  border-color: #b70606;
-  transition: 0.25s;
+    background-color: rgba(166, 206, 57, 0.09);
+    color: #b70606;
+    border-color: #b70606;
+    transition: 0.25s;
 }
 
 .btn-delinea-outline:hover {
-  color: #800101 !important;
-  background-color: rgba(166, 206, 57, 0.2) !important;
+    color: #800101 !important;
+    background-color: rgba(166, 206, 57, 0.2) !important;
 }
 
 .modal-dialog.modal-lg {
-  max-width: 30rem;
+    max-width: 30rem;
 }
 
 .modal-footer {
-  padding: 1rem 10% 0px;
+    padding: 1rem 10% 0px;
 }
 
-.clr-form-control  {
-  margin-top: 0 !important;
+.clr-form-control {
+    margin-top: 0 !important;
 }
 
 .title-panel {
-  padding: 0.05rem !important;
+    padding: 0.05rem !important;
 }
 
 .datagrid-placeholder {
-  display: none !important;
+    display: none !important;
 }
 
-.products-grid > .datagrid {
-  background-color: #fff5cc;
-  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace !important;
+.products-grid>.datagrid {
+    background-color: #fff5cc;
+    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace !important;
 }
 
 #btn-login {
-  margin-top: 1.2rem;
+    margin-top: 1.2rem;
 }
 
 #no-login {
-  margin-top: 0.7rem;
-  text-align: center;
+    margin-top: 0.7rem;
+    text-align: center;
 }

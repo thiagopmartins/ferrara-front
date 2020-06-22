@@ -5,6 +5,7 @@ import { OrdersComponent } from "./orders.components/orders.component";
 import { OrdersRoutingModule } from "./orders-routing.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [OrdersComponent],
@@ -12,7 +13,8 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     OrdersRoutingModule,
     SharedModule,
     CurrencyMaskModule,
-    NgxMaskModule.forChild()
+    NgxMaskModule.forChild(),
+    NgxPrintModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: []

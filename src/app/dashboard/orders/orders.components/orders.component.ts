@@ -373,4 +373,8 @@ export class OrdersComponent implements OnInit {
   onDelete(order: ProductOfOrder): void {
     this.productsOfOrder = this.productsOfOrder.filter(p => p !== order);
   }
+
+  onPrint(){
+    window.print();
+  }
 }
