@@ -365,4 +365,12 @@ export class OrdersComponent implements OnInit {
   showPrinterModal(): void {
     this.showModal = true;
   }
+
+  paymentIsMoney(): Boolean {
+    return +this.payment === PaymentEnum.money;
+  }
+
+  onDelete(order: ProductOfOrder): void {
+    this.productsOfOrder = this.productsOfOrder.filter(p => p !== order);
+  }
 }
