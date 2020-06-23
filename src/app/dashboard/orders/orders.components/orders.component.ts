@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ClrWizard } from '@clr/angular';
 
@@ -25,9 +25,8 @@ interface ProductOfOrder {
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
 })
-
 export class OrdersComponent implements OnInit {
-  @ViewChild('wizardxl', {static: true}) wizardExtraLarge: ClrWizard;
+  @ViewChild('wizardxl', { static: true }) wizardExtraLarge: ClrWizard;
   xlOpen = false;
 
   formCustomer: FormGroup;
@@ -55,20 +54,20 @@ export class OrdersComponent implements OnInit {
   blockCheckboxAdditionals: Boolean = false;
   orderPrice = 0;
   order: Order = {
-    price: 0.00
+    price: 0.0,
   };
 
   discounts: Discount[] = [];
   discountFiltred: Discount = {
-    value: 0.00,
-    type: DiscountTypeEnum.value
+    value: 0.0,
+    type: DiscountTypeEnum.value,
   };
   discountName: string;
 
   payment: PaymentEnum;
 
-  change = 0.00;
-  custumizeMoneyPayment = 0.00;
+  change = 0.0;
+  custumizeMoneyPayment = 0.0;
 
   constructor(
     private activiteRouter: ActivatedRoute,
@@ -91,8 +90,13 @@ export class OrdersComponent implements OnInit {
       aptoBlock: [''],
       apto: [''],
       lot: [''],
-      deliveryTax: [0.00, Validators.required],
+      deliveryTax: [0.0, Validators.required],
       referencePoint: [''],
+    });
+
+    this.formCustomer.statusChanges.subscribe((value) => {
+      console.log(value);
+      this.getCustomer();
     });
 
     this.controllersCustomer = Object.keys(this.formCustomer.controls);
@@ -153,7 +157,9 @@ export class OrdersComponent implements OnInit {
 
   getPriceProductOfOrder(order: ProductOfOrder): string {
     let price = 0;
-    const productMax = order.products.reduce((prev, current) => (prev.price > current.price) ? prev : current);
+    const productMax = order.products.reduce((prev, current) =>
+      prev.price > current.price ? prev : current
+    );
     price = productMax.price;
     if (order.additional !== undefined && order.additional !== undefined) {
       price += order.additional.price;
@@ -170,8 +176,8 @@ export class OrdersComponent implements OnInit {
     this.blockCheckboxProduct = false;
     this.blockCheckboxAdditionals = false;
     this.discountFiltred = {
-      value: 0.00,
-      type: DiscountTypeEnum.value
+      value: 0.0,
+      type: DiscountTypeEnum.value,
     };
     this.xlOpen = true;
   }
@@ -181,17 +187,19 @@ export class OrdersComponent implements OnInit {
       this.productsFiltred = this.products.filter(
         (m) => +m.category === +this.productCategory
       );
-      this.productsFiltred.forEach(p => p['isChecked'] = false);
+      this.productsFiltred.forEach((p) => (p['isChecked'] = false));
     } else if (this.currentPageIndex === 2) {
       this.additionalsFiltred = this.products.filter(
         (m) => +m.category === +CategoryEnum.additional
       );
-      this.additionalsFiltred.forEach(p => p['isChecked'] = false);
+      this.additionalsFiltred.forEach((p) => (p['isChecked'] = false));
     }
   }
 
   get currentPageIndex() {
-    return this.wizardExtraLarge.pageCollection.getPageIndex(this.wizardExtraLarge.currentPage);
+    return this.wizardExtraLarge.pageCollection.getPageIndex(
+      this.wizardExtraLarge.currentPage
+    );
   }
 
   listProducts() {
@@ -205,23 +213,31 @@ export class OrdersComponent implements OnInit {
   }
 
   checkedProdutcs(): void {
-    this.blockCheckboxProduct = this.productsFiltred.filter(p => p['isChecked']).length >= 2;
+    this.blockCheckboxProduct =
+      this.productsFiltred.filter((p) => p['isChecked']).length >= 2;
   }
 
   checkedAdditionals(): void {
-    this.blockCheckboxAdditionals = this.additionalsFiltred.filter(p => p['isChecked']).length >= 1;
+    this.blockCheckboxAdditionals =
+      this.additionalsFiltred.filter((p) => p['isChecked']).length >= 1;
   }
 
   requestOrder() {
-    const product: Product[] = this.productsFiltred.filter(p => p['isChecked']);
-    const additional: Product = this.additionalsFiltred.filter(p => p['isChecked'])[0];
+    const product: Product[] = this.productsFiltred.filter(
+      (p) => p['isChecked']
+    );
+    const additional: Product = this.additionalsFiltred.filter(
+      (p) => p['isChecked']
+    )[0];
 
     this.productsOfOrder.push({
-      additional: this.additionalsFiltred.filter(p => p['isChecked'])[0],
-      products: product
+      additional: this.additionalsFiltred.filter((p) => p['isChecked'])[0],
+      products: product,
     });
 
-    const productMax = product.reduce((prev, current) => (prev.price > current.price) ? prev : current);
+    const productMax = product.reduce((prev, current) =>
+      prev.price > current.price ? prev : current
+    );
     this.orderPrice += productMax.price;
 
     if (additional !== undefined && additional !== null) {
@@ -238,7 +254,7 @@ export class OrdersComponent implements OnInit {
     if (+this.discountFiltred.type === DiscountTypeEnum.value) {
       this.order.price -= this.discountFiltred.value;
     } else if (+this.discountFiltred.type === DiscountTypeEnum.percentage) {
-      this.order.price -= this.order.price *  this.discountFiltred.value / 100;
+      this.order.price -= (this.order.price * this.discountFiltred.value) / 100;
     }
   }
 
@@ -291,7 +307,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getDeliveryTax(): string {
-      return this.formCustomer.controls['deliveryTax'].value;
+    return this.formCustomer.controls['deliveryTax'].value;
   }
 
   listDiscounts(): void {
@@ -310,15 +326,13 @@ export class OrdersComponent implements OnInit {
   searchDiscount() {
     console.log(this.payment);
     if (this.discountName === null || this.discountName === undefined) {
-      this.dialogService.confirm(
-        `Digite o nome de um cupom`
-      );
+      this.dialogService.confirm(`Digite o nome de um cupom`);
     } else {
       this.discountFiltred = this.discounts.filter(
         (m) => m.name === this.discountName.trim()
       )[0];
       if (this.discountFiltred === null || this.discountFiltred === undefined) {
-        this.discountFiltred.value = 0.00;
+        this.discountFiltred.value = 0.0;
         this.dialogService.confirm(`Cupom não encontrado`);
       } else {
         this.reloadOrderPrice();
@@ -346,9 +360,13 @@ export class OrdersComponent implements OnInit {
   }
 
   getChange(): string {
-    let change: number = this.change - (+this.payment === PaymentEnum.moneyAndCard ? this.custumizeMoneyPayment : this.order.price);
+    let change: number =
+      this.change -
+      (+this.payment === PaymentEnum.moneyAndCard
+        ? this.custumizeMoneyPayment
+        : this.order.price);
     if (change < 0) {
-      change = 0.00;
+      change = 0.0;
     }
     return change.toString();
   }
@@ -356,7 +374,7 @@ export class OrdersComponent implements OnInit {
   getCardPayment(): string {
     let cardPay: number = this.order.price - this.custumizeMoneyPayment;
     if (cardPay < 0) {
-      cardPay = 0.00;
+      cardPay = 0.0;
     }
 
     return cardPay.toString();
@@ -371,10 +389,20 @@ export class OrdersComponent implements OnInit {
   }
 
   onDelete(order: ProductOfOrder): void {
-    this.productsOfOrder = this.productsOfOrder.filter(p => p !== order);
+    this.productsOfOrder = this.productsOfOrder.filter((p) => p !== order);
   }
 
-  onPrint(){
+  onPrint() {
     window.print();
+  }
+
+  getCustomer() {
+    if (
+      (this.customerSelected.name === 'Nenhum' &&
+        this.formCustomer.controls['name'] !== undefined) ||
+      this.customerSelected.name !== this.formCustomer.controls['name'].value
+    ) {
+      this.customerSelected = this.formCustomer.value;
+    }
   }
 }

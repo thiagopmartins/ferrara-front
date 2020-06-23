@@ -157,7 +157,7 @@
                     <h5 [hidden]="payment !== '4'">
                         Valor à pagar no Dinheiro: {{ transformToCurrency(custumizeMoneyPayment) }}
                     </h5>
-                    <h5 [hidden]="change === 0">
+                    <h5 [hidden]="payment !== '1' && payment !== '4'">
                         Troco: {{ transformToCurrency(getChange()) }}
                     </h5>
                     <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
@@ -210,7 +210,7 @@
     </clr-wizard-page>
 </clr-wizard>
 <div class="clr-col-sm-12 clr-col-md-12">
-    <button type="button" class="btn btn-success" [useExistingCss]="true" printSectionId="print" ngxPrint>
+    <button type="button" class="btn btn-success" [useExistingCss]="true" printSectionId="print" ngxPrint (click)="getCustomer()">
   Imprimir
 </button>
 </div>
@@ -218,10 +218,9 @@
 
 <div class="modal-body print" id="print">
     <img center src="../../../assets/logo-printer.png" />
-    <tr>
-        <td>TESTE</td>
-        <td>TESTE</td>
-        <td>TESTE</td>
-        <td>TESTE</td>
-    </tr>
+    <p>Ferrara Goumert</p>
+    <p>Delivery de Pizzas</p>
+    <p>Whatsapp: (21) 96910-6806</p>
+    <p>Telefone Fixo: (21) 2254-3839</p>
+    <p>Nome: {{ customerSelected.name }}</p>
 </div>
