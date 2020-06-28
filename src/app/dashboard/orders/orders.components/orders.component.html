@@ -17,6 +17,16 @@
 >
   <clr-icon shape="search"></clr-icon>
 </button>
+  <button
+    type="button"
+    class="btn btn-success"
+    [useExistingCss]="true"
+    printSectionId="print"
+    ngxPrint
+    (click)="getCustomer()"
+  >
+    Imprimir
+  </button>
 <clr-accordion clrAccordionMultiPanel="true">
   <clr-accordion-panel>
     <clr-accordion-title
@@ -437,18 +447,6 @@
     </div>
   </clr-wizard-page>
 </clr-wizard>
-<div class="clr-col-sm-12 clr-col-md-12">
-  <button
-    type="button"
-    class="btn btn-success"
-    [useExistingCss]="true"
-    printSectionId="print"
-    ngxPrint
-    (click)="getCustomer()"
-  >
-    Imprimir
-  </button>
-</div>
 
 <div class="modal-body print" id="print">
   <img center src="../../../assets/logo-printer.png" />
@@ -589,14 +587,14 @@
       Valor do cupom:
       {{ transformToCurrency(discountFiltred.value.toString()) }}
     </p>
-    <p [hidden]="payment !== '4'">
+    <p [hidden]="convertToInt(payment) !== 4">
       Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
     </p>
-    <p [hidden]="payment !== '4'">
+    <p [hidden]="convertToInt(payment) !== 4">
       Valor à pagar no Dinheiro:
-      {{ transformToCurrency(custumizeMoneyPayment) }}
+      {{ transformToCurrency(custumizeMoneyPayment.toString()) }}
     </p>
-    <p [hidden]="payment !== '1' && payment !== '4'">
+    <p [hidden]="convertToInt(payment) !== 1 && convertToInt(payment) !== 4">
       Troco: {{ transformToCurrency(getChange()) }}
     </p>
     <p>Total: {{ transformToCurrency(order.price.toString()) }}</p>

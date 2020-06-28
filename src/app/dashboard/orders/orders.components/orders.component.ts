@@ -358,6 +358,10 @@ export class OrdersComponent implements OnInit {
     return name;
   }
 
+  convertToInt(str): number {
+    return +str;
+  }
+
   getChange(): string {
     let change: number =
       this.change -
