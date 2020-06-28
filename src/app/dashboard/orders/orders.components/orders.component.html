@@ -1,226 +1,604 @@
-<input input-delinea type="text" size="30" maxlength="25" id="search-custumer" placeholder="Telefone cliente" style="margin-right: 0.5rem !important;" autocomplete="off" (input)="phone = $event.target.value" />
-<button type="button" class="btn btn-icon" aria-label="search" (click)="searchCustomer()">
+<input
+  input-delinea
+  type="text"
+  size="30"
+  maxlength="25"
+  id="search-custumer"
+  placeholder="Telefone cliente"
+  style="margin-right: 0.5rem !important;"
+  autocomplete="off"
+  (input)="phone = $event.target.value"
+/>
+<button
+  type="button"
+  class="btn btn-icon"
+  aria-label="search"
+  (click)="searchCustomer()"
+>
   <clr-icon shape="search"></clr-icon>
 </button>
 <clr-accordion clrAccordionMultiPanel="true">
-    <clr-accordion-panel>
-        <clr-accordion-title>Cliente: {{ customerSelected.name }}</clr-accordion-title>
-        <clr-accordion-content *clrIfExpanded>
-            <form [formGroup]="formCustomer" class="clr-form" autocomplete="off">
-                <section>
-                    <clr-input-container class="form-group">
-                        <label for="name" class="required">Nome do cliente</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="name" size="72" maxlength="68" autocomplete="off" />
+  <clr-accordion-panel>
+    <clr-accordion-title
+      >Cliente: {{ customerSelected.name }}</clr-accordion-title
+    >
+    <clr-accordion-content *clrIfExpanded>
+      <form [formGroup]="formCustomer" class="clr-form" autocomplete="off">
+        <section>
+          <clr-input-container class="form-group">
+            <label for="name" class="required">Nome do cliente</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="name"
+                size="72"
+                maxlength="68"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="phone" class="required">Telefone</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="phone" size="48" maxlength="44" autocomplete="off"
-                mask="(00) 0*" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="phone" class="required">Telefone</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="phone"
+                size="48"
+                maxlength="44"
+                autocomplete="off"
+                mask="(00) 0*"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="dateOfBirth">Data de Nascimento</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="date" formControlName="dateOfBirth" size="34" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="dateOfBirth">Data de Nascimento</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="date"
+                formControlName="dateOfBirth"
+                size="34"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="address" class="required">Endereço</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="address" size="72" maxlength="68" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="address" class="required">Endereço</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="address"
+                size="72"
+                maxlength="68"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="district">Bairro</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="district" size="47" maxlength="40" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="district">Bairro</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="district"
+                size="47"
+                maxlength="40"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="number">Número</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="number" formControlName="number" size="9" maxlength="68" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="number">Número</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="number"
+                formControlName="number"
+                size="9"
+                maxlength="68"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="lot">Lote</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="lot" size="16" maxlength="18" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="lot">Lote</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="lot"
+                size="16"
+                maxlength="18"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="block">Quadra</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="block" size="14" maxlength="18" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="block">Quadra</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="block"
+                size="14"
+                maxlength="18"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="aptoBlock">Bloco</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="aptoBlock" size="14" maxlength="18"
-                autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="aptoBlock">Bloco</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="aptoBlock"
+                size="14"
+                maxlength="18"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="apto">Apto</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="apto" size="14" maxlength="18" autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="apto">Apto</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="apto"
+                size="14"
+                maxlength="18"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="number" class="required">Taxa de entrega</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="deliveryTax" size="16" maxlength="68" autocomplete="off"
-                currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="R$ 0,00" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="number" class="required">Taxa de entrega</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="deliveryTax"
+                size="16"
+                maxlength="68"
+                autocomplete="off"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                placeholder="R$ 0,00"
+              />
             </label>
-                    </clr-input-container>
-                    <clr-input-container class="form-group">
-                        <label for="referencePoint">Ponto de Referência</label>
-                        <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm">
-              <input input-delinea type="text" formControlName="referencePoint" size="51" maxlength="60"
-                autocomplete="off" />
+          </clr-input-container>
+          <clr-input-container class="form-group">
+            <label for="referencePoint">Ponto de Referência</label>
+            <label
+              aria-haspopup="true"
+              role="tooltip"
+              class="tooltip tooltip-validation tooltip-sm"
+            >
+              <input
+                input-delinea
+                type="text"
+                formControlName="referencePoint"
+                size="51"
+                maxlength="60"
+                autocomplete="off"
+              />
             </label>
-                    </clr-input-container>
-                </section>
-            </form>
-        </clr-accordion-content>
-    </clr-accordion-panel>
-    <clr-accordion-panel>
-        <clr-accordion-title>Pedido: {{ transformToCurrency(orderPrice.toString()) }}</clr-accordion-title>
-        <clr-accordion-content *clrIfExpanded>
-            <clr-datagrid class="datagrid-compact products-grid" style="min-height: 0 !important; padding: 0 !important;">
-                <clr-dg-column>Tipo</clr-dg-column>
-                <clr-dg-column>Borda</clr-dg-column>
-                <clr-dg-column>Produto</clr-dg-column>
-                <clr-dg-column>Valor</clr-dg-column>
-                <clr-dg-row *clrDgItems="let product of productsOfOrder" [clrDgItem]="product">
-                    <clr-dg-cell>{{ getCategoryName(product) }}</clr-dg-cell>
-                    <clr-dg-cell>{{ getAdditionalItem(product) }}</clr-dg-cell>
-                    <clr-dg-cell>{{ getProductName(product) }}</clr-dg-cell>
-                    <clr-dg-cell>{{ getPriceProductOfOrder(product) }}</clr-dg-cell>
-                    <clr-dg-action-overflow>
-                        <button class="action-item" (click)="onEdit(product)">
+          </clr-input-container>
+        </section>
+      </form>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+  <clr-accordion-panel>
+    <clr-accordion-title
+      >Pedido:
+      {{ transformToCurrency(orderPrice.toString()) }}</clr-accordion-title
+    >
+    <clr-accordion-content *clrIfExpanded>
+      <clr-datagrid
+        class="datagrid-compact products-grid"
+        style="min-height: 0 !important; padding: 0 !important;"
+      >
+        <clr-dg-column>Tipo</clr-dg-column>
+        <clr-dg-column>Borda</clr-dg-column>
+        <clr-dg-column>Produto</clr-dg-column>
+        <clr-dg-column>Valor</clr-dg-column>
+        <clr-dg-row
+          *clrDgItems="let product of productsOfOrder"
+          [clrDgItem]="product"
+        >
+          <clr-dg-cell>{{ getCategoryName(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getAdditionalItem(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getProductName(product) }}</clr-dg-cell>
+          <clr-dg-cell>{{ getPriceProductOfOrder(product) }}</clr-dg-cell>
+          <clr-dg-action-overflow>
+            <button class="action-item" (click)="onEdit(product)">
               Editar
             </button>
-                        <button class="action-item" (click)="onDelete(product)">
+            <button class="action-item" (click)="onDelete(product)">
               Remover
             </button>
-                    </clr-dg-action-overflow>
-                </clr-dg-row>
-            </clr-datagrid>
-            <button type="button" class="btn btn-success-outline" (click)="wizardProducts()">
+          </clr-dg-action-overflow>
+        </clr-dg-row>
+      </clr-datagrid>
+      <button
+        type="button"
+        class="btn btn-success-outline"
+        (click)="wizardProducts()"
+      >
         Adicionar produto
       </button>
-        </clr-accordion-content>
-    </clr-accordion-panel>
-    <clr-accordion-panel>
-        <clr-accordion-title>Forma de Pagamento - Valor Final: {{ transformToCurrency(order.price.toString()) }}
-        </clr-accordion-title>
-        <clr-accordion-content *clrIfExpanded>
-            <div class="clr-row" style="margin-top: 1rem;">
-                <div class="clr-col-5">
-                    <input input-delinea type="text" size="30" maxlength="25" placeholder="Cupom de desconto" style="margin: 0 0.7rem !important;" autocomplete="off" (input)="discountName = $event.target.value" />
-                    <button type="button" class="btn btn-icon" aria-label="tags" (click)="searchDiscount()">
+    </clr-accordion-content>
+  </clr-accordion-panel>
+  <clr-accordion-panel>
+    <clr-accordion-title
+      >Forma de Pagamento - Valor Final:
+      {{ transformToCurrency(order.price.toString()) }}
+    </clr-accordion-title>
+    <clr-accordion-content *clrIfExpanded>
+      <div class="clr-row" style="margin-top: 1rem;">
+        <div class="clr-col-5">
+          <input
+            input-delinea
+            type="text"
+            size="30"
+            maxlength="25"
+            placeholder="Cupom de desconto"
+            style="margin: 0 0.7rem !important;"
+            autocomplete="off"
+            (input)="discountName = $event.target.value"
+          />
+          <button
+            type="button"
+            class="btn btn-icon"
+            aria-label="tags"
+            (click)="searchDiscount()"
+          >
             <clr-icon shape="tags"></clr-icon>
           </button>
 
-                    <div style="
+          <div
+            style="
               padding-top: 0.5rem !important;
               width: 200px !important;
               margin-left: 0.7rem !important;
-            ">
-                        <label for="payment" class="required">Forma de Pagamento</label>
-                        <select input-delinea clrSelect name="payment" [(ngModel)]="payment" style="width: 175px !important;">
+            "
+          >
+            <label for="payment" class="required">Forma de Pagamento</label>
+            <select
+              input-delinea
+              clrSelect
+              name="payment"
+              [(ngModel)]="payment"
+              style="width: 175px !important;"
+            >
               <option value="1">Dinheiro</option>
               <option value="2">Cartão de Débito</option>
               <option value="3">Cartão de Crédito</option>
               <option value="4">Dinheiro e Cartão</option>
             </select>
-                        <input input-delinea type="text" size="20" maxlength="25" placeholder="Valor pago em dinheiro" autocomplete="off" (input)="custumizeMoneyPayment = $event.target.value" style="margin-top: 1rem;" [hidden]="payment !== '4'" />
-                        <input input-delinea type="text" size="20" maxlength="25" placeholder="Troco para" autocomplete="off" (input)="change = $event.target.value" style="margin-top: 1rem;" [hidden]="payment !== '1' && payment !== '4'" />
-                    </div>
-                </div>
-                <div id="details-order" class="clr-col-6">
-                    <h5>
-                        Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}
-                    </h5>
-                    <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
-                    <h5>
-                        Valor do cupom: {{ transformToCurrency(discountFiltred.value.toString()) }}
-                    </h5>
-                    <h5 [hidden]="payment !== '4'">
-                        Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
-                    </h5>
-                    <h5 [hidden]="payment !== '4'">
-                        Valor à pagar no Dinheiro: {{ transformToCurrency(custumizeMoneyPayment) }}
-                    </h5>
-                    <h5 [hidden]="payment !== '1' && payment !== '4'">
-                        Troco: {{ transformToCurrency(getChange()) }}
-                    </h5>
-                    <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
-                </div>
-            </div>
-        </clr-accordion-content>
-    </clr-accordion-panel>
+            <input
+              input-delinea
+              type="text"
+              size="20"
+              maxlength="25"
+              placeholder="Valor pago em dinheiro"
+              autocomplete="off"
+              (input)="custumizeMoneyPayment = $event.target.value"
+              style="margin-top: 1rem;"
+              [hidden]="payment !== '4'"
+            />
+            <input
+              input-delinea
+              type="text"
+              size="20"
+              maxlength="25"
+              placeholder="Troco para"
+              autocomplete="off"
+              (input)="change = $event.target.value"
+              style="margin-top: 1rem;"
+              [hidden]="payment !== '1' && payment !== '4'"
+            />
+          </div>
+        </div>
+        <div id="details-order" class="clr-col-6">
+          <h5>
+            Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}
+          </h5>
+          <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
+          <h5>
+            Valor do cupom:
+            {{ transformToCurrency(discountFiltred.value.toString()) }}
+          </h5>
+          <h5 [hidden]="payment !== '4'">
+            Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
+          </h5>
+          <h5 [hidden]="payment !== '4'">
+            Valor à pagar no Dinheiro:
+            {{ transformToCurrency(custumizeMoneyPayment) }}
+          </h5>
+          <h5 [hidden]="payment !== '1' && payment !== '4'">
+            Troco: {{ transformToCurrency(getChange()) }}
+          </h5>
+          <h2>Total: {{ transformToCurrency(order.price.toString()) }}</h2>
+        </div>
+      </div>
+    </clr-accordion-content>
+  </clr-accordion-panel>
 </clr-accordion>
 <clr-wizard #wizardxl [(clrWizardOpen)]="xlOpen">
-    <clr-wizard-title></clr-wizard-title>
+  <clr-wizard-title></clr-wizard-title>
 
-    <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
-    <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
-    <clr-wizard-button [type]="'next'" (click)="pageLoading()">Proximo</clr-wizard-button>
-    <clr-wizard-button [type]="'finish'" (click)="requestOrder()">Finalizar</clr-wizard-button>
+  <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
+  <clr-wizard-button [type]="'next'" (click)="pageLoading()"
+    >Proximo</clr-wizard-button
+  >
+  <clr-wizard-button [type]="'finish'" (click)="requestOrder()"
+    >Finalizar</clr-wizard-button
+  >
 
-    <clr-wizard-page [clrWizardPageNextDisabled]="!productCategory">
-        <ng-template clrPageTitle>Categoria do Produto</ng-template>
-        <select input-delinea clrSelect name="category" [(ngModel)]="productCategory" style="width: 175px !important;">
+  <clr-wizard-page [clrWizardPageNextDisabled]="!productCategory">
+    <ng-template clrPageTitle>Categoria do Produto</ng-template>
+    <select
+      input-delinea
+      clrSelect
+      name="category"
+      [(ngModel)]="productCategory"
+      style="width: 175px !important;"
+    >
       <option value="2">Pizza Salgada 35cm</option>
       <option value="3">Pizza Salgada 45cm</option>
       <!--<option value="4">Pizza Doce 30cm</option> -->
       <option value="5">Pizza Doce 35cm</option>
       <option value="6">Bebida</option>
     </select>
-    </clr-wizard-page>
+  </clr-wizard-page>
 
-    <clr-wizard-page>
-        <ng-template clrPageTitle>Produto</ng-template>
-        <div class="clr-col-sm-12 clr-col-md-12">
-            <clr-checkbox-container>
-                <clr-checkbox-wrapper *ngFor="let item of productsFiltred">
-                    <input type="checkbox" clrCheckbox [(ngModel)]="item.isChecked" (change)="checkedProdutcs()" [disabled]="blockCheckboxProduct && !item.isChecked" />
-                    <label>{{ item.name }} - {{ transformToCurrency(item.price) }}</label>
-                </clr-checkbox-wrapper>
-            </clr-checkbox-container>
-        </div>
-    </clr-wizard-page>
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Produto</ng-template>
+    <div class="clr-col-sm-12 clr-col-md-12">
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper *ngFor="let item of productsFiltred">
+          <input
+            type="checkbox"
+            clrCheckbox
+            [(ngModel)]="item.isChecked"
+            (change)="checkedProdutcs()"
+            [disabled]="blockCheckboxProduct && !item.isChecked"
+          />
+          <label>{{ item.name }} - {{ transformToCurrency(item.price) }}</label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
+    </div>
+  </clr-wizard-page>
 
-    <clr-wizard-page *ngIf="productCategory < 6">
-        <ng-template clrPageTitle>Adicional</ng-template>
-        <div class="clr-col-sm-12 clr-col-md-12">
-            <clr-checkbox-container>
-                <clr-checkbox-wrapper *ngFor="let item of additionalsFiltred">
-                    <input type="checkbox" clrCheckbox [(ngModel)]="item.isChecked" (change)="checkedAdditionals()" [disabled]="blockCheckboxAdditionals && !item.isChecked" />
-                    <label>{{ item.name }} - {{ transformToCurrency(item.price) }}</label>
-                </clr-checkbox-wrapper>
-            </clr-checkbox-container>
-        </div>
-    </clr-wizard-page>
+  <clr-wizard-page *ngIf="productCategory < 6">
+    <ng-template clrPageTitle>Adicional</ng-template>
+    <div class="clr-col-sm-12 clr-col-md-12">
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper *ngFor="let item of additionalsFiltred">
+          <input
+            type="checkbox"
+            clrCheckbox
+            [(ngModel)]="item.isChecked"
+            (change)="checkedAdditionals()"
+            [disabled]="blockCheckboxAdditionals && !item.isChecked"
+          />
+          <label>{{ item.name }} - {{ transformToCurrency(item.price) }}</label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
+    </div>
+  </clr-wizard-page>
 </clr-wizard>
 <div class="clr-col-sm-12 clr-col-md-12">
-    <button type="button" class="btn btn-success" [useExistingCss]="true" printSectionId="print" ngxPrint (click)="getCustomer()">
-  Imprimir
-</button>
+  <button
+    type="button"
+    class="btn btn-success"
+    [useExistingCss]="true"
+    printSectionId="print"
+    ngxPrint
+    (click)="getCustomer()"
+  >
+    Imprimir
+  </button>
 </div>
 
-
 <div class="modal-body print" id="print">
-    <img center src="../../../assets/logo-printer.png" />
-    <p>Ferrara Goumert</p>
-    <p>Delivery de Pizzas</p>
+  <img center src="../../../assets/logo-printer.png" />
+  <div class="clr-col-sm-12 clr-col-md-12 box">
     <p>Whatsapp: (21) 96910-6806</p>
     <p>Telefone Fixo: (21) 2254-3839</p>
+  </div>
+  <div class="clr-col-sm-12 clr-col-md-12 box">
+    <p *ngIf="getItensOnTypeCount(2) > 0">
+      {{ getItensOnTypeCount(2) }}x - 35cm (SALGADA)
+    </p>
+    <p *ngIf="getItensOnTypeCount(3) > 0">
+      {{ getItensOnTypeCount(3) }}x - 45cm (SALGADA)
+    </p>
+    <p *ngIf="getItensOnTypeCount(4) > 0">
+      {{ getItensOnTypeCount(4) }}x - 30cm (DOCE)
+    </p>
+    <p *ngIf="getItensOnTypeCount(5) > 0">
+      {{ getItensOnTypeCount(5) }}x - 35cm (DOCE)
+    </p>
+  </div>
+  <div
+    class="clr-col-sm-12 clr-col-md-12 box"
+    *ngFor="let order of getItensOnType(2)"
+  >
+    <p>Borda: {{ getBorderName(order) }}</p>
+    <p>Sabores:</p>
+    <ul *ngFor="let product of order.products">
+      <li>{{ product.name }}</li>
+    </ul>
+  </div>
+  <div
+    class="clr-col-sm-12 clr-col-md-12 box"
+    *ngFor="let order of getItensOnType(3)"
+  >
+    <p>Borda: {{ getBorderName(order) }}</p>
+    <p>Sabores:</p>
+    <ul *ngFor="let product of order.products">
+      <li>{{ product.name }}</li>
+    </ul>
+  </div>
+  <div
+    class="clr-col-sm-12 clr-col-md-12 box"
+    *ngFor="let order of getItensOnType(4)"
+  >
+    <p>Borda: {{ getBorderName(order) }}</p>
+    <p>Sabores:</p>
+    <ul *ngFor="let product of order.products">
+      <li>{{ product.name }}</li>
+    </ul>
+  </div>
+  <div
+    class="clr-col-sm-12 clr-col-md-12 box"
+    *ngFor="let order of getItensOnType(5)"
+  >
+    <p>Borda: {{ getBorderName(order) }}</p>
+    <p>Sabores:</p>
+    <ul *ngFor="let product of order.products">
+      <li>{{ product.name }}</li>
+    </ul>
+  </div>
+  <div
+    *ngIf="getItensOnTypeCount(6) > 0"
+    class="clr-col-sm-12 clr-col-md-12 box"
+  >
+    <p>Refrigerante:</p>
+    <div *ngFor="let order of getItensOnType(6)">
+      <ul *ngFor="let prod of order.products">
+        <li>{{ prod.name }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    *ngIf="customerSelected !== undefined && customerSelected.name !== 'Nenhum'"
+    class="clr-col-sm-12 clr-col-md-12 box"
+  >
     <p>Nome: {{ customerSelected.name }}</p>
+    <p>Telefone: {{ customerSelected.phone }}</p>
+    <p>
+      Endereço: {{ customerSelected.address }}, Nº {{ customerSelected.number }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.district !== undefined &&
+        customerSelected.district !== ''
+      "
+    >
+      Bairro: {{ customerSelected.district }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.apto !== undefined && customerSelected.apto !== ''
+      "
+    >
+      Apto: {{ customerSelected.apto }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.aptoBlock !== undefined &&
+        customerSelected.aptoBlock !== ''
+      "
+    >
+      Bloco: {{ customerSelected.aptoBlock }}
+    </p>
+    <p
+      *ngIf="customerSelected.lot !== undefined && customerSelected.lot !== ''"
+    >
+      Lote: {{ customerSelected.lot }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.block !== undefined && customerSelected.block !== ''
+      "
+    >
+      Quadra: {{ customerSelected.block }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.referencePoint !== undefined &&
+        customerSelected.referencePoint !== ''
+      "
+    >
+      Ponto de Referência: {{ customerSelected.referencePoint }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.deliveryTax !== undefined &&
+        customerSelected.deliveryTax !== ''
+      "
+    >
+      Taxa de Entrega: {{ transformToCurrency(customerSelected.deliveryTax) }}
+    </p>
+  </div>
+  <div class="clr-col-sm-12 clr-col-md-12 box">
+    <p>Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}</p>
+    <p>
+      Valor do cupom:
+      {{ transformToCurrency(discountFiltred.value.toString()) }}
+    </p>
+    <p [hidden]="payment !== '4'">
+      Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
+    </p>
+    <p [hidden]="payment !== '4'">
+      Valor à pagar no Dinheiro:
+      {{ transformToCurrency(custumizeMoneyPayment) }}
+    </p>
+    <p [hidden]="payment !== '1' && payment !== '4'">
+      Troco: {{ transformToCurrency(getChange()) }}
+    </p>
+    <p>Total: {{ transformToCurrency(order.price.toString()) }}</p>
+  </div>
 </div>

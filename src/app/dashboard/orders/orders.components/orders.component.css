@@ -18,6 +18,10 @@ form .form-group {
     display: inline-block;
 }
 
+p {
+  margin: 0
+}
+
 .products-grid>.datagrid {
     background-color: #fff9e2;
 }
@@ -30,14 +34,15 @@ form .form-group {
     display: none;
 }
 
+.box {
+  border: 1px solid black;
+  margin-top: 0.5rem;
+}
+
 #search-custumer {
     margin: 0.5rem 0 0 0.7rem !important;
 }
 
 #details-order {
     margin: 1rem 1rem 3rem 0.8rem;
-}
-
-p {
-  margin: 0
 }

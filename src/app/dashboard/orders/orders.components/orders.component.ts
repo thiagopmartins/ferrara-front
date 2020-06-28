@@ -95,7 +95,6 @@ export class OrdersComponent implements OnInit {
     });
 
     this.formCustomer.statusChanges.subscribe((value) => {
-      console.log(value);
       this.getCustomer();
     });
 
@@ -400,9 +399,28 @@ export class OrdersComponent implements OnInit {
     if (
       (this.customerSelected.name === 'Nenhum' &&
         this.formCustomer.controls['name'] !== undefined) ||
-      this.customerSelected.name !== this.formCustomer.controls['name'].value
+      this.customerSelected !== this.formCustomer.patchValue
     ) {
       this.customerSelected = this.formCustomer.value;
     }
+  }
+
+  getItensOnType(category: CategoryEnum): ProductOfOrder[] {
+    const prod = this.productsOfOrder.filter(
+      (m) => m.products.find((p) => +p.category === +category)
+    );
+    return prod;
+  }
+
+  getItensOnTypeCount(category: CategoryEnum): number {
+    const prod = this.getItensOnType(category);
+    return prod === undefined || prod === null ? 0 : prod.length;
+  }
+
+  getBorderName(order: ProductOfOrder): string {
+    if (order.additional === undefined || order.additional === null) {
+      return 'Sem borda';
+    }
+    return order.additional.name;
   }
 }
