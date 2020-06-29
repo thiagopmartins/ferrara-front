@@ -31,18 +31,26 @@ p {
 }
 
 .print {
-    display: none;
+    display: block;
 }
 
-.box {
-  border: 1px solid black;
-  margin-top: 0.5rem;
+@media print {
+
+  .print {
+    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace !important;
+  }
+
+  .box {
+    border: 1px solid black;
+    margin-top: 0.5rem;
+  }
+
+  #search-custumer {
+      margin: 0.5rem 0 0 0.7rem !important;
+  }
+
+  #details-order {
+      margin: 1rem 1rem 3rem 0.8rem;
+  }
 }
 
-#search-custumer {
-    margin: 0.5rem 0 0 0.7rem !important;
-}
-
-#details-order {
-    margin: 1rem 1rem 3rem 0.8rem;
-}
