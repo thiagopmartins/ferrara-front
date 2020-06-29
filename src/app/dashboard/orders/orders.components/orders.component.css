@@ -31,7 +31,7 @@ p {
 }
 
 .print {
-    display: block;
+    display: none;
 }
 
 @media print {
