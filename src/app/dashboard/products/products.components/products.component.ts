@@ -161,11 +161,11 @@ export class ProductsComponent implements OnInit {
     let value: number;
     switch (+category) {
       case 2: {
-        value = 32.90;
+        value = 33.00;
         break;
       }
       case 3: {
-        value = 47.90;
+        value = 48.00;
         break;
       }
       case 5: {
