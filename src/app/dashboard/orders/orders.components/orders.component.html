@@ -532,14 +532,15 @@
     <p
       *ngIf="
         customerSelected.district !== undefined &&
-        customerSelected.district !== ''
+        customerSelected.district !== '' &&
+        customerSelected.district !== null
       "
     >
       Bairro: {{ customerSelected.district }}
     </p>
     <p
       *ngIf="
-        customerSelected.apto !== undefined && customerSelected.apto !== ''
+        customerSelected.apto !== undefined && customerSelected.apto !== '' && customerSelected.apto !== null
       "
     >
       Apto: {{ customerSelected.apto }}
@@ -547,19 +548,20 @@
     <p
       *ngIf="
         customerSelected.aptoBlock !== undefined &&
-        customerSelected.aptoBlock !== ''
+        customerSelected.aptoBlock !== '' &&
+        customerSelected.aptoBlock !== null
       "
     >
       Bloco: {{ customerSelected.aptoBlock }}
     </p>
     <p
-      *ngIf="customerSelected.lot !== undefined && customerSelected.lot !== ''"
+      *ngIf="customerSelected.lot !== undefined && customerSelected.lot !== '' && customerSelected.lot !== null"
     >
       Lote: {{ customerSelected.lot }}
     </p>
     <p
       *ngIf="
-        customerSelected.block !== undefined && customerSelected.block !== ''
+        customerSelected.block !== undefined && customerSelected.block !== '' & customerSelected.block !== null
       "
     >
       Quadra: {{ customerSelected.block }}
@@ -567,7 +569,7 @@
     <p
       *ngIf="
         customerSelected.referencePoint !== undefined &&
-        customerSelected.referencePoint !== ''
+        customerSelected.referencePoint !== '' && customerSelected.referencePoint !== null
       "
     >
       Ponto de Referência: {{ customerSelected.referencePoint }}
@@ -575,7 +577,7 @@
     <p
       *ngIf="
         customerSelected.deliveryTax !== undefined &&
-        customerSelected.deliveryTax !== ''
+        customerSelected.deliveryTax !== '' && customerSelected.deliveryTax !== null
       "
     >
       Taxa de Entrega: {{ transformToCurrency(customerSelected.deliveryTax) }}
