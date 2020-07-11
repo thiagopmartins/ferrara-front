@@ -45,9 +45,17 @@ p {
 
 @media print {
   * {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
     font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif !important;
-    font-weight: 900  !important;
+    font-weight: 500  !important;
     letter-spacing: normal;
+    line-height: 1rem;
+  }
+
+  p {
     line-height: 1rem;
   }
 
@@ -61,7 +69,7 @@ p {
     border: 1px solid black;
     margin-top: 0.5rem;
     border-radius: 4px;
-    padding: 4px;
+    padding: 6px;
   }
 
   .box {
