@@ -449,12 +449,12 @@
 </clr-wizard>
 
 <div class="modal-body print" id="print">
-  <img src="../../../assets/logo-printer.png" style="display: block; margin-left: auto; margin-right: auto;" />
-  <div class="clr-col-sm-12 clr-col-md-12 box">
+  <img src="../../../assets/logo-printer.png"/>
+  <div class="clr-col-sm-12 clr-col-md-12 box-radius">
     <p>Whatsapp: (21) 96910-6806</p>
     <p>Telefone Fixo: (21) 2254-3839</p>
   </div>
-  <div class="clr-col-sm-12 clr-col-md-12 box">
+  <div class="clr-col-sm-12 clr-col-md-12 box-radius">
     <p *ngIf="getItensOnTypeCount(2) > 0">
       {{ getItensOnTypeCount(2) }}x - 35cm (SALGADA)
     </p>
@@ -469,7 +469,7 @@
     </p>
   </div>
   <div
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(2)"
   >
     <p>Borda: {{ getBorderName(order) }}</p>
@@ -479,7 +479,7 @@
     </ul>
   </div>
   <div
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(3)"
   >
     <p>Borda: {{ getBorderName(order) }}</p>
@@ -489,7 +489,7 @@
     </ul>
   </div>
   <div
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(4)"
   >
     <p>Borda: {{ getBorderName(order) }}</p>
@@ -499,7 +499,7 @@
     </ul>
   </div>
   <div
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(5)"
   >
     <p>Borda: {{ getBorderName(order) }}</p>
@@ -510,7 +510,7 @@
   </div>
   <div
     *ngIf="getItensOnTypeCount(6) > 0"
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box-radius"
   >
     <p>Refrigerante:</p>
     <div *ngFor="let order of getItensOnType(6)">

@@ -1,56 +1,72 @@
 clr-accordion {
-    padding: 0.7rem !important;
+  padding: 0.7rem !important;
 }
 
 h5 {
-    margin: 0;
+  margin: 0;
 }
 
 img {
-    width: auto;
-    height: 80px;
+  width: auto;
+  height: 80px;
 }
 
 .form .form-group,
 form .form-group {
-    padding-left: 0 !important;
-    padding-top: 0 !important;
-    display: inline-block;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  display: inline-block;
 }
 
 p {
-  margin: 0
+  margin: 0;
 }
 
-.products-grid>.datagrid {
-    background-color: #fff9e2;
+.products-grid > .datagrid {
+  background-color: #fff9e2;
 }
 
 .datagrid-table .datagrid-cell {
-    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace !important;
+  font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter,
+    monospace !important;
 }
 
 .print {
-    display: none;
+  display: none;
+}
+
+#search-custumer {
+  margin: 0.5rem 0 0 0.7rem !important;
+}
+
+#details-order {
+  margin: 1rem 1rem 3rem 0.8rem;
 }
 
 @media print {
+  * {
+    font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif !important;
+    font-weight: 900  !important;
+    letter-spacing: normal;
+    line-height: 1rem;
+  }
 
-  .print {
-    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace !important;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .box-radius {
+    border: 1px solid black;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    padding: 4px;
   }
 
   .box {
     border: 1px solid black;
     margin-top: 0.5rem;
-  }
-
-  #search-custumer {
-      margin: 0.5rem 0 0 0.7rem !important;
-  }
-
-  #details-order {
-      margin: 1rem 1rem 3rem 0.8rem;
+    padding: 4px;
   }
 }
-
