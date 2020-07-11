@@ -57,6 +57,11 @@ p {
 
   p {
     line-height: 1rem;
+    padding-bottom: 2px;
+  }
+
+  li {
+    margin-left: 10px
   }
 
   img {
