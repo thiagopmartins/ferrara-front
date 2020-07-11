@@ -341,7 +341,7 @@ export class OrdersComponent implements OnInit {
 
   getPaymentName(payment: PaymentEnum): string {
     let name: string;
-    switch (payment) {
+    switch (+payment) {
       case 1: {
         name = 'Dinheiro';
         break;

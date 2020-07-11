@@ -366,12 +366,19 @@
             Valor do cupom:
             {{ transformToCurrency(discountFiltred.value.toString()) }}
           </h5>
+          <h5 [hidden]="convertToInt(payment) === 4">
+            Forma de Pagamento: {{ getPaymentName(payment) }}
+          </h5>
           <h5 [hidden]="payment !== '4'">
             Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
           </h5>
           <h5 [hidden]="payment !== '4'">
             Valor à pagar no Dinheiro:
             {{ transformToCurrency(custumizeMoneyPayment) }}
+          </h5>
+          <h5 [hidden]="convertToInt(payment) !== 4 && convertToInt(payment) !== 1">
+            Dinheiro a receber:
+            {{ transformToCurrency(change.toString()) }}
           </h5>
           <h5 [hidden]="payment !== '1' && payment !== '4'">
             Troco: {{ transformToCurrency(getChange()) }}
@@ -585,9 +592,12 @@
   </div>
   <div class="clr-col-sm-12 clr-col-md-12 box">
     <p>Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}</p>
-    <p>
+    <p [hidden]="discountFiltred.value < 1">
       Valor do cupom:
       {{ transformToCurrency(discountFiltred.value.toString()) }}
+    </p>
+    <p [hidden]="convertToInt(payment) === 4">
+      Forma de Pagamento: {{ getPaymentName(payment) }}
     </p>
     <p [hidden]="convertToInt(payment) !== 4">
       Valor à pagar no Cartão: {{ transformToCurrency(getCardPayment()) }}
@@ -595,6 +605,10 @@
     <p [hidden]="convertToInt(payment) !== 4">
       Valor à pagar no Dinheiro:
       {{ transformToCurrency(custumizeMoneyPayment.toString()) }}
+    </p>
+    <p [hidden]="convertToInt(payment) !== 4 && convertToInt(payment) !== 1">
+      Dinheiro a receber:
+      {{ transformToCurrency(change.toString()) }}
     </p>
     <p [hidden]="convertToInt(payment) !== 1 && convertToInt(payment) !== 4">
       Troco: {{ transformToCurrency(getChange()) }}
