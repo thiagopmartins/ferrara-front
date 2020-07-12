@@ -66,7 +66,7 @@
                 size="48"
                 maxlength="44"
                 autocomplete="off"
-                mask="(00) 0*"
+                mask="(00) 00000-0000"
               />
             </label>
           </clr-input-container>
@@ -479,7 +479,7 @@
     class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(2)"
   >
-    <p>Borda: {{ getBorderName(order) }}</p>
+    <p class="border">Borda: {{ getBorderName(order) }}</p>
     <p>Sabores:</p>
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
@@ -489,7 +489,7 @@
     class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(3)"
   >
-    <p>Borda: {{ getBorderName(order) }}</p>
+    <p class="border">Borda: {{ getBorderName(order) }}</p>
     <p>Sabores:</p>
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
@@ -499,7 +499,7 @@
     class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(4)"
   >
-    <p>Borda: {{ getBorderName(order) }}</p>
+    <p class="border">Borda: {{ getBorderName(order) }}</p>
     <p>Sabores:</p>
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
@@ -509,7 +509,7 @@
     class="clr-col-sm-12 clr-col-md-12 box-radius"
     *ngFor="let order of getItensOnType(5)"
   >
-    <p>Borda: {{ getBorderName(order) }}</p>
+    <p class="border">Borda: {{ getBorderName(order) }}</p>
     <p>Sabores:</p>
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
@@ -532,7 +532,7 @@
     class="clr-col-sm-12 clr-col-md-12 box"
   >
     <p>Nome: {{ customerSelected.name }}</p>
-    <p>Telefone: {{ customerSelected.phone }}</p>
+    <p>Telefone: {{ customerSelected.phone | mask: '(00) 00000-0000' }}</p>
     <p>
       Endereço: {{ customerSelected.address }}, Nº {{ customerSelected.number }}
     </p>
