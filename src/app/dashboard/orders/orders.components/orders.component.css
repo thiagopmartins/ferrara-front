@@ -49,8 +49,9 @@ p {
     margin: 0;
     border: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: Calibri, Segoe, "Segoe UI", sans-serif !important;
     font-weight: 600  !important;
+    font-size: 12px !important;
     letter-spacing: normal;
   }
 
@@ -80,6 +81,10 @@ p {
     border: 1px solid black;
     margin-top: 0.5rem;
     padding: 4px;
+  }
+
+  .customer > p:not(:first-child):not(:last-child) {
+    margin: 0.8rem 0;
   }
 
   .border {

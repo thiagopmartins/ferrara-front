@@ -529,7 +529,7 @@
 
   <div
     *ngIf="customerSelected !== undefined && customerSelected.name !== 'Nenhum'"
-    class="clr-col-sm-12 clr-col-md-12 box"
+    class="clr-col-sm-12 clr-col-md-12 box customer"
   >
     <p>Nome: {{ customerSelected.name }}</p>
     <p>Telefone: {{ customerSelected.phone | mask: '(00) 00000-0000' }}</p>

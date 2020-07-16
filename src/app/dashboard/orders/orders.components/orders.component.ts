@@ -423,7 +423,7 @@ export class OrdersComponent implements OnInit {
 
   getBorderName(order: ProductOfOrder): string {
     if (order.additional === undefined || order.additional === null) {
-      return 'Sem borda';
+      return '';
     }
     return order.additional.name;
   }
