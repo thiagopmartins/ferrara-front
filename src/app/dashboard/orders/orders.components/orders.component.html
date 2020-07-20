@@ -17,16 +17,16 @@
 >
   <clr-icon shape="search"></clr-icon>
 </button>
-  <button
-    type="button"
-    class="btn btn-success"
-    [useExistingCss]="true"
-    printSectionId="print"
-    ngxPrint
-    (click)="getCustomer()"
-  >
-    Imprimir
-  </button>
+<button
+  type="button"
+  class="btn btn-success"
+  [useExistingCss]="true"
+  printSectionId="print"
+  ngxPrint
+  (click)="getCustomer()"
+>
+  Imprimir
+</button>
 <clr-accordion clrAccordionMultiPanel="true">
   <clr-accordion-panel>
     <clr-accordion-title
@@ -373,7 +373,11 @@
             Valor à pagar no Dinheiro:
             {{ transformToCurrency(custumizeMoneyPayment) }}
           </h5>
-          <h5 [hidden]="convertToInt(payment) !== 4 && convertToInt(payment) !== 1">
+          <h5
+            [hidden]="
+              convertToInt(payment) !== 4 && convertToInt(payment) !== 1
+            "
+          >
             Dinheiro a receber:
             {{ transformToCurrency(change.toString()) }}
           </h5>
@@ -454,13 +458,18 @@
   <clr-wizard-page *ngIf="productCategory < 6">
     <ng-template clrPageTitle>Observações</ng-template>
     <div class="clr-col-sm-12 clr-col-md-12">
-      <textarea input-delinea name="description" style="width: 100%; height: 165px;" (input)="description = $event.target.value"></textarea>
+      <textarea
+        input-delinea
+        name="description"
+        style="width: 100%; height: 165px;"
+        [(ngModel)]="description"
+      ></textarea>
     </div>
   </clr-wizard-page>
 </clr-wizard>
 
 <div class="modal-body print" id="print">
-  <img src="../../../assets/logo-printer.png"/>
+  <img src="../../../assets/logo-printer.png" />
   <div class="clr-col-sm-12 clr-col-md-12 box-radius">
     <p>Whatsapp: (21) 96910-6806</p>
     <p>Telefone Fixo: (21) 2254-3839</p>
@@ -488,7 +497,11 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
-    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
+    <p
+      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+    >
+      OBS: {{ order.description }}
+    </p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -499,7 +512,11 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
-    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
+    <p
+      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+    >
+      OBS: {{ order.description }}
+    </p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -510,7 +527,11 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
-    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
+    <p
+      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+    >
+      OBS: {{ order.description }}
+    </p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -521,7 +542,11 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
-    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
+    <p
+      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+    >
+      OBS: {{ order.description }}
+    </p>
   </div>
   <div
     *ngIf="getItensOnTypeCount(6) > 0"
@@ -540,9 +565,49 @@
     class="clr-col-sm-12 clr-col-md-12 box customer"
   >
     <p>Nome: {{ customerSelected.name }}</p>
-    <p>Telefone: {{ customerSelected.phone | mask: '(00) 00000-0000' }}</p>
-    <p>
+    <p>Telefone: {{ customerSelected.phone | mask: "(00) 00000-0000" }}</p>
+    <p style="margin: 0 !important;">
       Endereço: {{ customerSelected.address }}, Nº {{ customerSelected.number }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.apto !== undefined &&
+        customerSelected.apto !== '' &&
+        customerSelected.apto !== null
+      "
+      style="margin: 0 !important;"
+    >
+      Apto: {{ customerSelected.apto }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.aptoBlock !== undefined &&
+        customerSelected.aptoBlock !== '' &&
+        customerSelected.aptoBlock !== null
+      "
+      style="margin: 0 !important;"
+    >
+      Bloco: {{ customerSelected.aptoBlock }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.lot !== undefined &&
+        customerSelected.lot !== '' &&
+        customerSelected.lot !== null
+      "
+      style="margin: 0 !important;"
+    >
+      Lote: {{ customerSelected.lot }}
+    </p>
+    <p
+      *ngIf="
+        customerSelected.block !== undefined &&
+        customerSelected.block !== '' &&
+        customerSelected.block !== null
+      "
+      style="margin: 0 !important;"
+    >
+      Quadra: {{ customerSelected.block }}
     </p>
     <p
       *ngIf="
@@ -555,36 +620,9 @@
     </p>
     <p
       *ngIf="
-        customerSelected.apto !== undefined && customerSelected.apto !== '' && customerSelected.apto !== null
-      "
-    >
-      Apto: {{ customerSelected.apto }}
-    </p>
-    <p
-      *ngIf="
-        customerSelected.aptoBlock !== undefined &&
-        customerSelected.aptoBlock !== '' &&
-        customerSelected.aptoBlock !== null
-      "
-    >
-      Bloco: {{ customerSelected.aptoBlock }}
-    </p>
-    <p
-      *ngIf="customerSelected.lot !== undefined && customerSelected.lot !== '' && customerSelected.lot !== null"
-    >
-      Lote: {{ customerSelected.lot }}
-    </p>
-    <p
-      *ngIf="
-        customerSelected.block !== undefined && customerSelected.block !== '' && customerSelected.block !== null
-      "
-    >
-      Quadra: {{ customerSelected.block }}
-    </p>
-    <p
-      *ngIf="
         customerSelected.referencePoint !== undefined &&
-        customerSelected.referencePoint !== '' && customerSelected.referencePoint !== null
+        customerSelected.referencePoint !== '' &&
+        customerSelected.referencePoint !== null
       "
     >
       Ponto de Referência: {{ customerSelected.referencePoint }}
@@ -592,7 +630,8 @@
     <p
       *ngIf="
         customerSelected.deliveryTax !== undefined &&
-        customerSelected.deliveryTax !== '' && customerSelected.deliveryTax !== null
+        customerSelected.deliveryTax !== '' &&
+        customerSelected.deliveryTax !== null
       "
     >
       Taxa de Entrega: {{ transformToCurrency(customerSelected.deliveryTax) }}

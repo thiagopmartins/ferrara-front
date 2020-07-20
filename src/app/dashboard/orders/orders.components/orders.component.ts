@@ -182,6 +182,7 @@ export class OrdersComponent implements OnInit {
       type: DiscountTypeEnum.value,
     };
     this.xlOpen = true;
+    this.description = '';
   }
 
   pageLoading(): void {
@@ -247,6 +248,7 @@ export class OrdersComponent implements OnInit {
       this.orderPrice += additional.price;
     }
     console.log(this.productsOfOrder);
+    this.description = null;
     this.reloadOrderPrice();
   }
 
