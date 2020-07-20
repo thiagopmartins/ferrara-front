@@ -18,6 +18,7 @@ import { PaymentEnum } from 'src/app/utils/enums/PaymentEnum';
 interface ProductOfOrder {
   products: Product[];
   additional: Product;
+  description: string;
 }
 
 @Component({
@@ -36,6 +37,8 @@ export class OrdersComponent implements OnInit {
   };
 
   customers: Customer[];
+
+  description: string;
 
   controllersCustomer: string[] = [];
   erro: string[] = [];
@@ -232,6 +235,7 @@ export class OrdersComponent implements OnInit {
     this.productsOfOrder.push({
       additional: this.additionalsFiltred.filter((p) => p['isChecked'])[0],
       products: product,
+      description: this.description
     });
 
     const productMax = product.reduce((prev, current) =>
@@ -242,7 +246,7 @@ export class OrdersComponent implements OnInit {
     if (additional !== undefined && additional !== null) {
       this.orderPrice += additional.price;
     }
-
+    console.log(this.productsOfOrder);
     this.reloadOrderPrice();
   }
 
@@ -392,7 +396,19 @@ export class OrdersComponent implements OnInit {
   }
 
   onDelete(order: ProductOfOrder): void {
+    console.log(order);
     this.productsOfOrder = this.productsOfOrder.filter((p) => p !== order);
+
+    const productMax = order.products.reduce((prev, current) =>
+      prev.price > current.price ? prev : current
+    );
+    this.orderPrice -= productMax.price;
+
+    if (order.additional !== undefined && order.additional !== null) {
+      this.orderPrice -= order.additional.price;
+    }
+
+    this.reloadOrderPrice();
   }
 
   onPrint() {

@@ -268,9 +268,6 @@
           <clr-dg-cell>{{ getProductName(product) }}</clr-dg-cell>
           <clr-dg-cell>{{ getPriceProductOfOrder(product) }}</clr-dg-cell>
           <clr-dg-action-overflow>
-            <button class="action-item" (click)="onEdit(product)">
-              Editar
-            </button>
             <button class="action-item" (click)="onDelete(product)">
               Remover
             </button>
@@ -453,6 +450,13 @@
       </clr-checkbox-container>
     </div>
   </clr-wizard-page>
+
+  <clr-wizard-page *ngIf="productCategory < 6">
+    <ng-template clrPageTitle>Observações</ng-template>
+    <div class="clr-col-sm-12 clr-col-md-12">
+      <textarea input-delinea name="description" style="width: 100%; height: 165px;" (input)="description = $event.target.value"></textarea>
+    </div>
+  </clr-wizard-page>
 </clr-wizard>
 
 <div class="modal-body print" id="print">
@@ -484,6 +488,7 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
+    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -494,6 +499,7 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
+    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -504,6 +510,7 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
+    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
   </div>
   <div
     class="clr-col-sm-12 clr-col-md-12 box-radius"
@@ -514,6 +521,7 @@
     <ul *ngFor="let product of order.products">
       <li>{{ product.name }}</li>
     </ul>
+    <p *ngIf="order.description !== undefined && order.description !== 'Nenhum'">OBS: {{order.description}}</p>
   </div>
   <div
     *ngIf="getItensOnTypeCount(6) > 0"
