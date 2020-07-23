@@ -417,6 +417,27 @@
       <option value="5">Pizza Doce 35cm</option>
       <option value="6">Bebida</option>
     </select>
+
+    <clr-input-container style="margin-top: 1rem !important;">
+      <label for="number" class="required">Valor: </label>
+      <label
+        aria-haspopup="true"
+        role="tooltip"
+        class="tooltip tooltip-validation tooltip-sm"
+      >
+        <input
+          input-delinea
+          type="text"
+          size="16"
+          maxlength="68"
+          autocomplete="off"
+          currencyMask
+          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+          placeholder=""
+          [(ngModel)]="custumizePrice"
+        />
+      </label>
+    </clr-input-container>
   </clr-wizard-page>
 
   <clr-wizard-page>

@@ -72,6 +72,8 @@ export class OrdersComponent implements OnInit {
   change = 0.0;
   custumizeMoneyPayment = 0.0;
 
+  custumizePrice: number;
+
   constructor(
     private activiteRouter: ActivatedRoute,
     private customerService: CustomerService,
@@ -183,6 +185,9 @@ export class OrdersComponent implements OnInit {
     };
     this.xlOpen = true;
     this.description = '';
+    this.custumizePrice = null;
+    this.products = JSON.parse(localStorage.getItem('products'));
+    console.log(this.products)
   }
 
   pageLoading(): void {
@@ -212,6 +217,7 @@ export class OrdersComponent implements OnInit {
       for (const i in data) {
         this.products.push(data[i]);
       }
+      localStorage.setItem('products', JSON.stringify(this.products));
     });
   }
 
@@ -232,10 +238,14 @@ export class OrdersComponent implements OnInit {
     const additional: Product = this.additionalsFiltred.filter(
       (p) => p['isChecked']
     )[0];
-
     this.productsOfOrder.push({
       additional: this.additionalsFiltred.filter((p) => p['isChecked'])[0],
-      products: product,
+      products: product.map(p => {
+        if (this.custumizePrice !== null && this.custumizePrice !== undefined) {
+          p.price = this.custumizePrice;
+        }
+        return p;
+      }),
       description: this.description
     });
 
@@ -247,7 +257,7 @@ export class OrdersComponent implements OnInit {
     if (additional !== undefined && additional !== null) {
       this.orderPrice += additional.price;
     }
-    console.log(this.productsOfOrder);
+
     this.description = null;
     this.reloadOrderPrice();
   }
