@@ -186,8 +186,7 @@ export class OrdersComponent implements OnInit {
     this.xlOpen = true;
     this.description = '';
     this.custumizePrice = null;
-    this.products = JSON.parse(localStorage.getItem('products'));
-    console.log(this.products)
+    this.products = JSON.parse(localStorage.getItem('products')).sort((a, b) => a.name < b.name ? -1 : 1);
   }
 
   pageLoading(): void {
@@ -454,5 +453,9 @@ export class OrdersComponent implements OnInit {
       return '';
     }
     return order.additional.name;
+  }
+
+  getDiscountValue(): string {
+    return this.transformToCurrency((this.orderPrice - this.order.price).toString());
   }
 }

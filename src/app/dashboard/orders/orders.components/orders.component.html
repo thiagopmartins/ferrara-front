@@ -360,8 +360,8 @@
           </h5>
           <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
           <h5>
-            Valor do cupom:
-            {{ transformToCurrency(discountFiltred.value.toString()) }}
+            Cupom de desconto {{discountFiltred.name}}:
+            {{ getDiscountValue() }}
           </h5>
           <h5 [hidden]="convertToInt(payment) === 4">
             Forma de Pagamento: {{ getPaymentName(payment) }}
@@ -661,8 +661,8 @@
   <div class="clr-col-sm-12 clr-col-md-12 box">
     <p>Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}</p>
     <p [hidden]="discountFiltred.value < 1">
-      Valor do cupom:
-      {{ transformToCurrency(discountFiltred.value.toString()) }}
+      Cupom de desconto {{discountFiltred.name}}:
+      {{ getDiscountValue() }}
     </p>
     <p [hidden]="convertToInt(payment) === 4">
       Forma de Pagamento: {{ getPaymentName(payment) }}
