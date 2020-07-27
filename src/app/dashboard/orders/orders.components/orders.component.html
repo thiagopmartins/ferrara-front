@@ -659,7 +659,6 @@
     </p>
   </div>
   <div class="clr-col-sm-12 clr-col-md-12 box">
-    <p>Valor do pedido: {{ transformToCurrency(orderPrice.toString()) }}</p>
     <p [hidden]="discountFiltred.value < 1">
       Cupom de desconto {{discountFiltred.name}}:
       {{ getDiscountValue() }}
