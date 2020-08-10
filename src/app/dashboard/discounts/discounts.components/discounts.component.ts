@@ -22,7 +22,8 @@ export class DiscountsComponent implements OnInit {
   submitLoading = false;
   buttonSubmitText: string;
   value: string;
-  prefix: string = 'R$ ';
+  prefix = 'R$ ';
+  requestOnlyValid = true;
 
   constructor(
     private discountService: DiscountService,
@@ -46,15 +47,30 @@ export class DiscountsComponent implements OnInit {
 
   listDiscounts() {
     this.discounts = [];
-    this.discountService.getAllDiscounts().subscribe((data: {}) => {
-      console.log(data);
-      for (const i in data) {
-        if (i === 'expireDate') {
-          data[i] = new Date(data[i]).toDateString();
+    if (this.requestOnlyValid) {
+      this.discountService.getAllValidDiscounts().subscribe((data: {}) => {
+        console.log(data);
+        // tslint:disable-next-line: forin
+        for (const i in data) {
+          if (i === 'expireDate') {
+            data[i] = new Date(data[i]).toDateString();
+          }
+          this.discounts.push(data[i]);
         }
-        this.discounts.push(data[i]);
-      }
-    });
+      });
+    } else {
+      this.discountService.getAllDiscounts().subscribe((data: {}) => {
+        console.log(data);
+        // tslint:disable-next-line: forin
+        for (const i in data) {
+          if (i === 'expireDate') {
+            data[i] = new Date(data[i]).toDateString();
+          }
+          this.discounts.push(data[i]);
+        }
+      });
+    }
+
   }
 
   onCreate(): void {
@@ -151,5 +167,9 @@ export class DiscountsComponent implements OnInit {
 
   onChange(event): void {
     +event.target.value === 1 ? this.prefix = '% ' : this.prefix = 'R$ ';
+  }
+
+  onChangeTypeRequest() {
+    this.listDiscounts();
   }
 }

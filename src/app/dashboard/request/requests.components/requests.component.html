@@ -1,0 +1,24 @@
+<div class="clr-row request">
+  <div class="clr-col-lg-3 clr-col-12" *ngFor="let order of orders">
+    <div class="card card-production">
+      <div class="card-block">
+        <h3 class="card-title">{{ order.customer.name }}</h3>
+        <p class="card-text">
+          Telefone: {{ order.customer.phone | mask: "(00) 00000-0000" }}
+        </p>
+        <p class="card-text">
+          Pedido realizado: {{ getLocalDate(order.createdAt) }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group btn-primary-outline btn-icon">
+          <button role="tooltip" aria-haspopup="true" class="btn tooltip tooltip-md tooltip-bottom-right" (click)="onUpdateOrder(order)">
+            <clr-icon shape="truck" class="is-solid"></clr-icon>
+            <span class="clr-icon-title">Home</span>
+            <span class="tooltip-content">Despachar Pedido</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

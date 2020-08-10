@@ -1,0 +1,14 @@
+.request {
+  padding: 1rem;;
+}
+.card-production {
+  border-top: 0.2rem solid #1567ab;
+}
+
+.card-sending {
+  border-top: 0.2rem solid   #f4b86d;
+}
+
+.card-finalized {
+  border-top: 0.2rem solid   #43a24f;
+}

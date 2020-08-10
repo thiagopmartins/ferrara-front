@@ -36,6 +36,13 @@ const routes: Routes = [
         data: {
           title: 'Pedidos'
         }
+      },
+      {
+        path: 'producao',
+        loadChildren: './request/requests.module#RequestsModule',
+        data: {
+          title: 'Produção'
+        }
       }
     ]
   }

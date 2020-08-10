@@ -14,12 +14,8 @@ import { Discount } from 'src/app/models/discount.model';
 import { DiscountService } from 'src/app/providers/discount.service';
 import { DiscountTypeEnum } from 'src/app/utils/enums/DiscountTypeEnum';
 import { PaymentEnum } from 'src/app/utils/enums/PaymentEnum';
-
-interface ProductOfOrder {
-  products: Product[];
-  additional: Product;
-  description: string;
-}
+import { OrderService } from 'src/app/providers/order.service';
+import { ProductOfOrder } from 'src/app/models/productOfOrder.model';
 
 @Component({
   selector: 'app-orders',
@@ -57,6 +53,7 @@ export class OrdersComponent implements OnInit {
   blockCheckboxAdditionals: Boolean = false;
   orderPrice = 0;
   order: Order = {
+    productsOfOrder: [],
     price: 0.0,
   };
 
@@ -79,6 +76,7 @@ export class OrdersComponent implements OnInit {
     private customerService: CustomerService,
     private discountService: DiscountService,
     private dialogService: DialogService,
+    private orderService: OrderService,
     private productService: ProductService,
     private fb: FormBuilder,
     private router: Router
@@ -101,6 +99,7 @@ export class OrdersComponent implements OnInit {
 
     this.formCustomer.statusChanges.subscribe((value) => {
       this.getCustomer();
+      this.reloadOrderPrice();
     });
 
     this.controllersCustomer = Object.keys(this.formCustomer.controls);
@@ -253,6 +252,8 @@ export class OrdersComponent implements OnInit {
     );
     this.orderPrice += productMax.price;
 
+    this.order.productsOfOrder = this.productsOfOrder;
+
     if (additional !== undefined && additional !== null) {
       this.orderPrice += additional.price;
     }
@@ -326,7 +327,7 @@ export class OrdersComponent implements OnInit {
 
   listDiscounts(): void {
     this.discounts = [];
-    this.discountService.getAllDiscounts().subscribe((data: {}) => {
+    this.discountService.getAllValidDiscounts().subscribe((data: {}) => {
       // tslint:disable-next-line: forin
       for (const i in data) {
         if (i === 'expireDate') {
@@ -338,7 +339,6 @@ export class OrdersComponent implements OnInit {
   }
 
   searchDiscount() {
-    console.log(this.payment);
     if (this.discountName === null || this.discountName === undefined) {
       this.dialogService.confirm(`Digite o nome de um cupom`);
     } else {
@@ -349,6 +349,10 @@ export class OrdersComponent implements OnInit {
         this.discountFiltred.value = 0.0;
         this.dialogService.confirm(`Cupom não encontrado`);
       } else {
+        this.order.discount = this.discountFiltred;
+
+        console.log(this.order);
+
         this.reloadOrderPrice();
       }
     }
@@ -407,8 +411,9 @@ export class OrdersComponent implements OnInit {
   }
 
   onDelete(order: ProductOfOrder): void {
-    console.log(order);
     this.productsOfOrder = this.productsOfOrder.filter((p) => p !== order);
+
+    this.order.productsOfOrder = this.productsOfOrder;
 
     const productMax = order.products.reduce((prev, current) =>
       prev.price > current.price ? prev : current
@@ -456,6 +461,26 @@ export class OrdersComponent implements OnInit {
   }
 
   getDiscountValue(): string {
-    return this.transformToCurrency((this.orderPrice - this.order.price).toString());
+    const discount = this.orderPrice - this.order.price;
+    if (discount < 0) {
+      return this.transformToCurrency('0');
+    }
+    return this.transformToCurrency(discount.toString());
+  }
+
+  finalize(): void {
+    // tslint:disable-next-line: quotemark
+    this.submitLoading = true;
+    this.order.customer = this.customerSelected;
+    this.dialogService.confirm('Deseja finalizar o pedido?')
+    .then((canFinalize: boolean) => {
+      if (canFinalize) {
+        this.orderService.createOrder(this.order).subscribe(data => {
+          this.dialogService.confirm(`Pedido criado com sucesso.`);
+          this.router.navigate(['dashboard/producao']);
+        },
+        () => (this.submitLoading = false));
+      }
+    });
   }
 }

@@ -27,6 +27,13 @@
 >
   Imprimir
 </button>
+<button
+  type="button"
+  class="btn btn-outline"
+  (click)="finalize()"
+>
+  Finalizar Pedido
+</button>
 <clr-accordion clrAccordionMultiPanel="true">
   <clr-accordion-panel>
     <clr-accordion-title
@@ -360,7 +367,7 @@
           </h5>
           <h5>Taxa de entrega: {{ transformToCurrency(getDeliveryTax()) }}</h5>
           <h5>
-            Cupom de desconto {{discountFiltred.name}}:
+            Cupom de desconto {{ discountFiltred.name }}:
             {{ getDiscountValue() }}
           </h5>
           <h5 [hidden]="convertToInt(payment) === 4">
@@ -519,7 +526,11 @@
       <li>{{ product.name }}</li>
     </ul>
     <p
-      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+      *ngIf="
+        order.description !== undefined &&
+        order.description !== null &&
+        order.description !== ''
+      "
     >
       OBS: {{ order.description }}
     </p>
@@ -534,7 +545,11 @@
       <li>{{ product.name }}</li>
     </ul>
     <p
-      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+      *ngIf="
+        order.description !== undefined &&
+        order.description !== null &&
+        order.description !== ''
+      "
     >
       OBS: {{ order.description }}
     </p>
@@ -549,7 +564,11 @@
       <li>{{ product.name }}</li>
     </ul>
     <p
-      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+      *ngIf="
+        order.description !== undefined &&
+        order.description !== null &&
+        order.description !== ''
+      "
     >
       OBS: {{ order.description }}
     </p>
@@ -564,7 +583,11 @@
       <li>{{ product.name }}</li>
     </ul>
     <p
-      *ngIf="order.description !== undefined && order.description !== null && order.description !== ''"
+      *ngIf="
+        order.description !== undefined &&
+        order.description !== null &&
+        order.description !== ''
+      "
     >
       OBS: {{ order.description }}
     </p>
@@ -660,7 +683,7 @@
   </div>
   <div class="clr-col-sm-12 clr-col-md-12 box">
     <p [hidden]="discountFiltred.value < 1">
-      Cupom de desconto {{discountFiltred.name}}:
+      Cupom de desconto {{ discountFiltred.name }}:
       {{ getDiscountValue() }}
     </p>
     <p [hidden]="convertToInt(payment) === 4">

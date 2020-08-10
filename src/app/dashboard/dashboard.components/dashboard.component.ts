@@ -66,6 +66,12 @@ export class DashboardComponent implements OnInit {
         icon: 'shopping-cart',
         link: './pedidos'
       }
+      ,
+      {
+        title: 'Produção',
+        icon: 'flame',
+        link: './producao'
+      }
     ];
   }
 

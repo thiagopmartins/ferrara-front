@@ -27,16 +27,30 @@
       >
         <clr-icon shape="pencil"></clr-icon> Editar
       </button>
+
+      <clr-toggle-wrapper style="margin-left: 2rem">
+        <input type="checkbox" clrToggle [(ngModel)]="requestOnlyValid" name="requestOnlyValid" (change)="onChangeTypeRequest()" />
+        <label>Apenas Cupons Ativos</label>
+      </clr-toggle-wrapper>
     </div>
   </clr-dg-action-bar>
   <clr-dg-placeholder>Sem Cupons cadastrados!</clr-dg-placeholder>
-  <clr-dg-column [clrDgField]="'name'" [clrDgSortBy]="'name'" [clrDgSortOrder]="1">Nome</clr-dg-column>
-  <clr-dg-column [clrDgField]="'expirationDate'">Data de expiração</clr-dg-column>
+  <clr-dg-column
+    [clrDgField]="'name'"
+    [clrDgSortBy]="'name'"
+    [clrDgSortOrder]="1"
+    >Nome</clr-dg-column
+  >
+  <clr-dg-column [clrDgField]="'expirationDate'"
+    >Data de expiração</clr-dg-column
+  >
   <clr-dg-column [clrDgField]="'value'">Valor do cupom</clr-dg-column>
+  <clr-dg-column [clrDgField]="'totalUse'">Total de Usos</clr-dg-column>
   <clr-dg-row *clrDgItems="let discount of discounts" [clrDgItem]="discount">
     <clr-dg-cell>{{ discount.name }}</clr-dg-cell>
     <clr-dg-cell>{{ transformDate(discount.expireDate) }}</clr-dg-cell>
     <clr-dg-cell>{{ transformDiscountValueOnType(discount) }}</clr-dg-cell>
+    <clr-dg-cell>{{ discount.totalUse }}</clr-dg-cell>
   </clr-dg-row>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
@@ -122,9 +136,21 @@
             />
           </label>
         </clr-input-container>
-        <div class="form-group" style="width: 254px !important; margin-bottom: 1rem !important">
-          <label for="type" class="required" style="font-weight: 600;">Tipo do cupom</label>
-          <select clrSelect input-delinea name="type" formControlName="type" (change)="onChange($event)" style="width: 200px !important;">
+        <div
+          class="form-group"
+          style="width: 254px !important; margin-bottom: 1rem !important;"
+        >
+          <label for="type" class="required" style="font-weight: 600;"
+            >Tipo do cupom</label
+          >
+          <select
+            clrSelect
+            input-delinea
+            name="type"
+            formControlName="type"
+            (change)="onChange($event)"
+            style="width: 200px !important;"
+          >
             <option value="1">Porcentagem</option>
             <option value="2">Valor R$</option>
           </select>

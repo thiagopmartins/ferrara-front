@@ -7,4 +7,5 @@ export interface Discount {
   value?: number;
   type?: DiscountTypeEnum;
   partner?: string;
+  totalUse?: number;
 }
