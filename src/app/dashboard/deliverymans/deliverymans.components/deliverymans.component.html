@@ -1,0 +1,108 @@
+<clr-datagrid
+  [(clrDgSingleSelected)]="deliverymanSelected"
+  [clDgRowSelection]="true"
+>
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-sm btn-success-outline"
+        (click)="onCreate()"
+      >
+        <clr-icon shape="plus"></clr-icon> Cadastrar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-danger-outline"
+        (click)="onDelete()"
+        [disabled]="!deliverymanSelected"
+      >
+        <clr-icon shape="close"></clr-icon> Deletar
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-secondary"
+        (click)="onEdit()"
+        [disabled]="!deliverymanSelected"
+      >
+        <clr-icon shape="pencil"></clr-icon> Editar
+      </button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-placeholder>Sem Entregadors cadastrados!</clr-dg-placeholder>
+  <clr-dg-column [clrDgField]="'name'">Nome</clr-dg-column>
+  <clr-dg-column [clrDgField]="'phone'">Telefone</clr-dg-column>
+  <clr-dg-row *clrDgItems="let deliveryman of deliverymans" [clrDgItem]="deliveryman">
+    <clr-dg-cell>{{ deliveryman.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ deliveryman.phone }}</clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} de
+      {{ pagination.totalItems }} Entregadors cadastrados
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'">
+  <h3 class="modal-title">Entregadors</h3>
+  <div class="modal-body">
+    <form [formGroup]="form" class="clr-form" autocomplete="off">
+      <section>
+        <clr-input-container class="form-group">
+          <label for="name" class="required">Nome do entregador</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="name"
+              size="72"
+              maxlength="68"
+              autocomplete="off"
+            />
+          </label>
+        </clr-input-container>
+        <clr-input-container  class="form-group">
+          <label for="phone" class="required">Telefone</label>
+          <label
+            aria-haspopup="true"
+            role="tooltip"
+            class="tooltip tooltip-validation tooltip-sm"
+          >
+            <input
+              input-delinea
+              type="text"
+              formControlName="phone"
+              size="72"
+              maxlength="68"
+              autocomplete="off"
+              mask="(00) 0*"
+            />
+          </label>
+        </clr-input-container >
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger-outline"
+      (click)="showModal = false"
+    >
+      Cancelar
+    </button>
+    <button
+      type="button"
+      [clrLoading]="submitLoading"
+      class="btn btn-success"
+      (click)="onSave()"
+      [disabled]="!form.valid || submitLoading"
+    >
+      {{ buttonSubmitText }}
+    </button>
+  </div>
+</clr-modal>

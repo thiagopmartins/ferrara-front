@@ -62,15 +62,24 @@ export class DashboardComponent implements OnInit {
         link: './cupons'
       },
       {
+        title: 'Entregadores',
+        icon: 'truck',
+        link: './entregadores'
+      },
+      {
         title: 'Pedidos',
         icon: 'shopping-cart',
         link: './pedidos'
-      }
-      ,
+      },
       {
         title: 'Produção',
         icon: 'flame',
         link: './producao'
+      },
+      {
+        title: 'Estatísticas',
+        icon: 'bar-chart',
+        link: './estatisticas'
       }
     ];
   }

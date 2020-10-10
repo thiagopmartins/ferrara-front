@@ -1,5 +1,8 @@
+<div class="title">
+  <h3>Em produção:</h3>
+</div>
 <div class="clr-row request">
-  <div class="clr-col-lg-3 clr-col-12" *ngFor="let order of orders">
+  <div class="clr-col-lg-4 clr-col-12" *ngFor="let order of ordersInProduction">
     <div class="card card-production">
       <div class="card-block">
         <h3 class="card-title">{{ order.customer.name }}</h3>
@@ -9,10 +12,123 @@
         <p class="card-text">
           Pedido realizado: {{ getLocalDate(order.createdAt) }}
         </p>
+        <select
+          input-delinea
+          clrSelect
+          name="category"
+          [(ngModel)]="order.deliveryman"
+          style="width: 175px !important;"
+        >
+          <option
+            *ngFor="let delivery of deliveryman; let i = index"
+            [value]="deliveryman[i]._id"
+          >
+            {{ deliveryman[i].name }}
+          </option>
+        </select>
       </div>
       <div class="card-footer">
         <div class="btn-group btn-primary-outline btn-icon">
-          <button role="tooltip" aria-haspopup="true" class="btn tooltip tooltip-md tooltip-bottom-right" (click)="onUpdateOrder(order)">
+          <button
+            role="tooltip"
+            aria-haspopup="true"
+            class="btn tooltip tooltip-md tooltip-bottom-right"
+            [disabled]="!order.deliveryman"
+            (click)="onUpdateOrder(order, 1)"
+          >
+            <clr-icon shape="truck" class="is-solid"></clr-icon>
+            <span class="clr-icon-title">Home</span>
+            <span class="tooltip-content">Despachar Pedido</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="title">
+  <h3>Em rota de entrega:</h3>
+</div>
+<div class="clr-row request">
+  <div class="clr-col-lg-4 clr-col-12" *ngFor="let order of ordersInDelivery">
+    <div class="card card-sending">
+      <div class="card-block">
+        <h3 class="card-title">{{ order.customer.name }}</h3>
+        <p class="card-text">
+          Telefone: {{ order.customer.phone | mask: "(00) 00000-0000" }}
+        </p>
+        <p class="card-text">
+          Pedido realizado: {{ getLocalDate(order.createdAt) }}
+        </p>
+        <select
+          input-delinea
+          clrSelect
+          name="category"
+          [(ngModel)]="order.deliveryman"
+          style="width: 175px !important;"
+        >
+          <option
+            *ngFor="let delivery of deliveryman; let i = index"
+            [value]="deliveryman[i]._id"
+          >
+            {{ deliveryman[i].name }}
+          </option>
+        </select>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group btn-primary-outline btn-icon">
+          <button
+            role="tooltip"
+            aria-haspopup="true"
+            class="btn tooltip tooltip-md tooltip-bottom-right"
+            (click)="onUpdateOrder(order, 2)"
+          >
+            <clr-icon shape="check" class="is-solid"></clr-icon>
+            <span class="clr-icon-title">Home</span>
+            <span class="tooltip-content">Finalizar Pedido</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="title">
+  <h3>Finalizados:</h3>
+</div>
+<div class="clr-row request">
+  <div class="clr-col-lg-4 clr-col-12" *ngFor="let order of ordersFinished">
+    <div class="card card-finalized">
+      <div class="card-block">
+        <h3 class="card-title">{{ order.customer.name }}</h3>
+        <p class="card-text">
+          Telefone: {{ order.customer.phone | mask: "(00) 00000-0000" }}
+        </p>
+        <p class="card-text">
+          Pedido realizado: {{ getLocalDate(order.createdAt) }}
+        </p>
+        <select
+          input-delinea
+          clrSelect
+          name="category"
+          [(ngModel)]="order.deliveryman"
+          style="width: 175px !important;"
+          disabled
+        >
+          <option
+            *ngFor="let delivery of deliveryman; let i = index"
+            [value]="deliveryman[i]._id"
+          >
+            {{ deliveryman[i].name }}
+          </option>
+        </select>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group btn-primary-outline btn-icon">
+          <button
+            role="tooltip"
+            aria-haspopup="true"
+            class="btn tooltip tooltip-md tooltip-bottom-right"
+            (click)="onUpdateOrder(order)"
+          >
             <clr-icon shape="truck" class="is-solid"></clr-icon>
             <span class="clr-icon-title">Home</span>
             <span class="tooltip-content">Despachar Pedido</span>

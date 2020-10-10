@@ -31,6 +31,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'entregadores',
+        loadChildren: './deliverymans/deliverymans.module#DeliverymansModule',
+        data: {
+          title: 'Entregadores'
+        }
+      },
+      {
         path: 'pedidos',
         loadChildren: './orders/orders.module#OrdersModule',
         data: {
@@ -42,6 +49,13 @@ const routes: Routes = [
         loadChildren: './request/requests.module#RequestsModule',
         data: {
           title: 'Produção'
+        }
+      },
+      {
+        path: 'estatisticas',
+        loadChildren: './statistics/statistics.module#StatisticsModule',
+        data: {
+          title: 'Estatisticas'
         }
       }
     ]
